@@ -2,456 +2,1490 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Arunami - Bridging the capital gap for good, impactful businesses in Indonesia. We invest, advise, and build sustainable companies.">
-    <meta name="keywords"
-        content="investment, Indonesia, impact investing, sustainable business, venture capital, SME funding">
-    <meta property="og:title" content="Arunami - Bridging the Capital Gap">
-    <meta property="og:description"
-        content="We aim to help good businesses: Profitable, hyper Sustainable Growth, and Deliver Social Impact.">
-    <meta property="og:type" content="website">
-    <title>Arunami - Bridging the Capital Gap</title>
-
-    <link rel="icon" href="favicon-32x32.jpg" sizes="32x32">
-    <link rel="icon" href="favicon-192x192.jpg" sizes="192x192">
-    <link rel="apple-touch-icon" href="favicon-180x180.jpg">
-
-    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/flexslider.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arunami | Stewarding Capital. Shaping Legacy.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        /* Custom Overrides for Arunami Specifics */
-        .service-box {
-            padding: 20px;
-            text-align: center;
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-alt: #f8faf9;
+            --color-bg-dark: #0d1f17;
+            --color-text: #1a2e23;
+            --color-text-light: #ffffff;
+            --color-text-muted: #5a6e62;
+            --color-accent: #1e5f3f;
+            --color-accent-light: #2a7a52;
+            --color-accent-soft: rgba(30, 95, 63, 0.08);
+            --color-border: rgba(30, 95, 63, 0.12);
+            --color-border-light: rgba(255, 255, 255, 0.15);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
         }
 
-        .service-box h3 {
-            margin-top: 15px;
-            font-weight: 600;
-        }
-
-        .comparison-table {
-            margin-top: 40px;
-            background: #fff;
-        }
-
-        .comparison-table th {
-            background-color: #f9f9f9;
-            text-align: center;
-            padding: 15px !important;
-        }
-
-        .comparison-table td {
-            text-align: center;
-            padding: 15px !important;
-            vertical-align: middle !important;
-        }
-
-        .highlight-column {
-            background-color: #f0f8ff;
-            border: 2px solid #00aaff;
-        }
-
-
-
-        .cta-section {
-            background: #f4f4f4;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        /* Portfolio Card Styling */
-        .projects-items .content h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .projects-items .content p {
-            font-size: 14px;
-            line-height: 1.4;
-            color: #666;
-        }
-
-        /* New Full Width Section Utility */
-        .styled-list {
-            list-style: none;
+        * {
+            margin: 0;
             padding: 0;
-            margin-top: 20px;
+            box-sizing: border-box;
         }
 
-        .styled-list li {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            font-size: 16px;
-            color: #555;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 4rem;
+            box-shadow: 0 1px 0 var(--color-border);
+        }
+
+        nav.hero-nav .nav-links a {
+            color: var(--color-text-light);
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--color-text);
+        }
+
+        nav.hero-nav .nav-cta {
+            border-color: var(--color-text-light);
+            color: var(--color-text-light);
+        }
+
+        nav.scrolled .nav-cta {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .logo {
             display: flex;
             align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        nav.hero-nav .logo img {
+            filter: brightness(0) invert(1);
+        }
+
+        nav.scrolled .logo img {
+            filter: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--color-accent-light);
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled .nav-cta:hover {
+            background: var(--color-accent);
+            color: var(--color-text-light);
+        }
+
+        nav.hero-nav .nav-cta:hover {
+            background: var(--color-text-light);
+            color: var(--color-bg-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
-            /* Center alignment */
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: linear-gradient(165deg, var(--color-bg-dark) 0%, #153d2a 50%, var(--color-accent) 100%);
+            color: var(--color-text-light);
         }
 
-        .styled-list li:last-child {
-            border-bottom: none;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(42, 122, 82, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(30, 95, 63, 0.2) 0%, transparent 50%);
+            pointer-events: none;
         }
 
-        .styled-list li i {
-            margin-right: 15px;
-            color: #2c3e50;
-            font-size: 18px;
-            width: 25px;
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5));
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: lineReveal 1.5s ease 0.5s forwards;
+        }
+
+        @keyframes lineReveal {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-tagline {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.8s forwards;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.4s forwards;
+        }
+
+        .btn-primary {
+            background: var(--color-text-light);
+            color: var(--color-bg-dark);
+            padding: 1.2rem 3rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-light);
+            padding: 1.2rem 3rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary-dark {
+            background: var(--color-accent);
+            color: var(--color-text-light);
+            padding: 1.2rem 3rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-dark:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary-dark {
+            background: transparent;
+            color: var(--color-text);
+            padding: 1.2rem 3rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-dark:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.8s forwards;
+            z-index: 10;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: scrollPulse 2s ease infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections Common */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .section-title span {
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        /* Introduction Section */
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-content p.highlight {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-text);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .intro-visual {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-accent-soft) 100%);
+            border: 1px solid var(--color-border);
+        }
+
+        .intro-visual::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+            border: 1px solid var(--color-accent);
+            opacity: 0.2;
+        }
+
+        .intro-visual::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, var(--color-accent-soft) 0%, transparent 70%);
+        }
+
+        .stat-overlay {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-border);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        /* Mandate Section */
+        .mandate {
+            background: var(--color-bg-alt);
+        }
+
+        .mandate-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mandate-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .mandate-header p {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+        }
+
+        .mandate-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .pillar {
+            padding: 3rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .pillar:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(30, 95, 63, 0.08);
+        }
+
+        .pillar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .pillar:hover::before {
+            transform: scaleX(1);
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .pillar h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .pillar p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .mandate-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .mandate-footer p {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-text);
+        }
+
+        /* Focus Section */
+        .focus-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .focus-item {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg);
+            transition: all 0.4s ease;
+        }
+
+        .focus-item:hover {
+            border-color: var(--color-accent);
+            background: var(--color-accent-soft);
+        }
+
+        .focus-icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .focus-item h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--color-text);
+        }
+
+        /* Approach Section */
+        .approach {
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+        }
+
+        .approach .section-label {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .approach .section-title {
+            color: var(--color-text-light);
+        }
+
+        .approach .section-title span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .approach-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .approach-header {
+            max-width: 600px;
+            margin-bottom: 5rem;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .approach-item {
+            display: flex;
+            gap: 2rem;
+            padding: 2.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .approach-item:hover {
+            border-left-color: var(--color-accent-light);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .approach-number {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--color-accent-light);
+            opacity: 0.5;
+            line-height: 1;
+        }
+
+        .approach-item h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+            color: var(--color-text-light);
+        }
+
+        .approach-item p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .approach-footer {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: center;
         }
 
-        table th {
-            color: inherit;
+        .approach-footer p {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--color-text-light);
+        }
+
+        /* Performance Section */
+        .performance-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .performance-highlight {
+            margin: 4rem 0;
+            padding: 4rem;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .performance-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+        }
+
+        .perf-stats {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            margin-bottom: 3rem;
+        }
+
+        .perf-stat {
+            text-align: center;
+        }
+
+        .perf-value {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .perf-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        .performance-text {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        .performance-footer {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--color-text);
+            margin-top: 2rem;
+        }
+
+        /* Partners Section */
+        .partners {
+            background: var(--color-bg-alt);
+        }
+
+        .partners-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .partner-card {
+            padding: 3rem;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .partner-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 20px 40px rgba(30, 95, 63, 0.08);
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 2rem;
+            right: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+        }
+
+        .partner-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .partner-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+
+        .partner-card p {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .partner-features {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .partner-features li {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .partner-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .partner-cta {
+            margin-top: 2rem;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-text);
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .philosophy::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, var(--color-accent-soft) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .philosophy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .philosophy blockquote {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+            color: var(--color-text);
+        }
+
+        .philosophy blockquote span {
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        .philosophy-text {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            margin-bottom: 4rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(165deg, var(--color-bg-dark) 0%, #153d2a 50%, var(--color-accent) 100%);
+            text-align: center;
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: var(--color-text-light);
+        }
+
+        .cta-subtitle {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid var(--color-border);
+            background: var(--color-bg);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            color: var(--color-text);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Animations on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            section {
+                padding: 5rem 2rem;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .intro-visual {
+                height: 350px;
+            }
+
+            .mandate-pillars {
+                grid-template-columns: 1fr;
+            }
+
+            .focus-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .perf-stats {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .focus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .perf-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partner-features {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-overlay {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div id="myloader">
-        <div class="loader">
-            <div class="spinner">
-                <div class="double-bounce1"></div>
-                <div class="double-bounce2"></div>
+    <!-- Navigation -->
+    <nav id="navbar" class="hero-nav">
+        <a href="#" class="logo"><img src="ArunamiLogo.svg" alt="Arunami"></a>
+        <ul class="nav-links">
+            <li><a href="#mandate">Mandate</a></li>
+            <li><a href="#focus">Focus</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#partners">Partners</a></li>
+        </ul>
+        <a href="https://www.linkedin.com/company/arunami-venture" target="_blank" class="nav-cta">Engage With Us</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-line"></div>
+            <p class="hero-tagline">An Impact-Driven Investment Partner</p>
+            <h1>Stewarding Capital.<br><span>Shaping Legacy.</span></h1>
+            <p class="hero-subtitle">Investing in enduring businesses across Indonesia with patience, discipline, and
+                purpose.</p>
+
+
+        </div>
+        <div class="scroll-indicator">
+            <span>Discover</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro">
+        <div class="intro">
+            <div class="intro-content reveal">
+                <span class="section-label">Our Philosophy</span>
+                <h2 class="section-title">Capital With <span>Patience</span>.<br>Value With <span>Intention</span>.</h2>
+                <p class="highlight">Arunami operates as an impact investment partner — deploying long-term capital into
+                    structurally strong businesses that generate sustainable returns and measurable societal value.</p>
+                <p>We invest with discipline, govern with rigor, and build with a multi-decade horizon. Short cycles do
+                    not define us. Stewardship does.</p>
+            </div>
+            <div class="intro-visual reveal">
+                <div class="stat-overlay">
+                    <div class="stat-item">
+                        <div class="stat-value">28%+</div>
+                        <div class="stat-label">Annual Returns</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">Multi-M</div>
+                        <div class="stat-label">AUM USD</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="main-wrap">
-        <header id="header" class="border">
-            <div class="container">
-                <nav class="navbar navbar-default">
-                    <div id="logo">
-                        <a class="navbar-brand" href="index.html">
-                            <img src="assets/img/arunami-horizontal-revision.png" class="normal" alt="Arunami">
-                            <img src="assets/img/arunami-horizontal-revision.png" class="retina" alt="Arunami">
-                        </a>
-                    </div>
-                    <div id="sidemenu">
-                        <div class="menu-holder">
-                            <ul>
-                                <li class="submenu"><a href="index.html" class="active-item">Home</a></li>
-                                <li class="submenu"><a href="about.html">About Us</a></li>
-                                <li class="submenu"><a href="portfolio-three-columns.html">Portfolio</a></li>
-                                <!-- <li class="submenu"><a href="blog.html">Journal</a></li> -->
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="menu-responsive-sidemenu">
-                        <div class="menu-button">
-                            <span class="bar bar-1"></span>
-                            <span class="bar bar-2"></span>
-                            <span class="bar bar-3"></span>
-                        </div>
-                    </div>
-                </nav>
+    </section>
+
+    <!-- Mandate Section -->
+    <section class="mandate" id="mandate">
+        <div class="mandate-container">
+            <div class="mandate-header reveal">
+                <span class="section-label">Our Mandate</span>
+                <h2 class="section-title">Where Three Principles <span>Intersect</span></h2>
+                <p>We allocate capital at the intersection of durability, integrity, and impact — where returns meet
+                    responsibility.</p>
             </div>
-        </header>
-        <div id="page-content">
-            <div class="container">
-                <div class="row no-margin">
-                    <div class="col-md-12 padding-leftright-null">
-                        <div id="home-header">
-                            <div class="text">
-                                <h1 class="margin-bottom-small">
-                                    <span class="grey-dark">Bridging Capital Gap</span><br>
-                                    for Good, Impactful Businesses<br>
-                                    in Indonesia
-                                </h1>
-                                <p class="heading left max full grey-dark">
-                                    We aim to help good businesses: Profitable, hyper Sustainable Growth, and Deliver
-                                    Social Impact.
-                                </p>
-                                <div style="margin-top:30px;">
-                                    <a href="#contact" class="btn-alt">Get In Touch</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="mandate-pillars">
+                <div class="pillar reveal">
+                    <i class="pillar-icon fa-solid fa-shield-halved"></i>
+                    <h3>Durability</h3>
+                    <p>Businesses with resilient economics and scalable models built to withstand market cycles and
+                        emerge stronger.</p>
+                </div>
+                <div class="pillar reveal">
+                    <i class="pillar-icon fa-solid fa-scale-balanced"></i>
+                    <h3>Integrity</h3>
+                    <p>Governance-first leadership and transparent reporting. We partner with operators who lead with
+                        ethics and accountability.</p>
+                </div>
+                <div class="pillar reveal">
+                    <i class="pillar-icon fa-solid fa-bullseye"></i>
+                    <h3>Impact</h3>
+                    <p>Tangible contribution to communities and real-sector growth. Every investment must advance
+                        societal progress.</p>
                 </div>
             </div>
-            <div id="home-wrap" class="content-section">
-
-                <div class="container padding-onlybottom-lg">
-                    <div class="row text-center">
-                        <div class="col-md-12">
-                            <h2 class="margin-bottom-small">We are Your Growth Partner</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 service-box">
-                            <i class="fa fa-line-chart fa-3x" aria-hidden="true"></i>
-                            <h3>Invest</h3>
-                            <p>Capital is a tool to accelerate growth. We believe that the capital support must be a
-                                “Smart Money” that helps your business to grow sustainably.</p>
-                        </div>
-                        <div class="col-md-4 service-box">
-                            <i class="fa fa-users fa-3x" aria-hidden="true"></i>
-                            <h3>Advise</h3>
-                            <p>We aim to create a holistic ecosystem that nurtures entrepreneurs by integrating
-                                financial advisory and business development support.</p>
-                        </div>
-                        <div class="col-md-4 service-box">
-                            <i class="fa fa-building-o fa-3x" aria-hidden="true"></i>
-                            <h3>Build</h3>
-                            <p>We facilitate access to resources, networks, and markets through targeted programs and
-                                partnerships, enabling businesses to scale.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container padding-onlybottom-lg">
-                    <div class="row text-center">
-                        <div class="col-md-12">
-                            <h2>Why Partner with Us?</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-bordered comparison-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Feature</th>
-                                            <th>Bank / Conventional Debt</th>
-                                            <th>Venture Capital</th>
-                                            <th class="highlight-column">Arunami Partner</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Security</strong></td>
-                                            <td>Collateral</td>
-                                            <td>Non-Collateral</td>
-                                            <td class="highlight-column"><strong>Non-Collateral</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Process Time</strong></td>
-                                            <td>2-3 months</td>
-                                            <td>3-6 months</td>
-                                            <td class="highlight-column"><strong>1-2 months</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Equity Impact</strong></td>
-                                            <td>Non-dilutive</td>
-                                            <td>Dilutive on equity</td>
-                                            <td class="highlight-column"><strong>Project financing (non-dilutive) or
-                                                    Equity participation</strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <section id="projects" data-isotope="load-simple"
-                        class="page padding-top-null padding-onlybottom-lg">
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <h2 class="margin-bottom-small">Our Portfolio</h2>
-                            </div>
-                        </div>
-
-                        <div class="row no-margin text-left">
-                            <div class="col-sm-12 padding-leftright-null">
-                                <div class="filter-wrap left">
-                                    <ul class="col-md-12 filters uppercase padding-leftright-null">
-                                        <li data-filter="*" class="is-checked">All</li>
-                                        <li data-filter=".energy">Energy & Tech</li>
-                                        <li data-filter=".agri">Agriculture & F&B</li>
-                                        <li data-filter=".health">Healthcare</li>
-                                        <li data-filter=".education">Education</li>
-                                        <li data-filter=".property">Property</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="projects-items equal three-columns">
-
-                            <div class="single-item one-item energy">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Gastech</h3>
-                                        <p>Clean Energy Solutions for Industrial & Agribusiness Operations</p>
-                                    </div>
-                                    <a href="gastech.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item energy">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Planet Laptop</h3>
-                                        <p>Authorized Refurbished & Curated Second-Hand Laptop Ecosystem</p>
-                                    </div>
-                                    <a href="planet-laptop.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item health">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Terapeutik</h3>
-                                        <p>Integrated Child Development & Therapy Services Platform</p>
-                                    </div>
-                                    <a href="terapeutik.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item agri">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Tumbara</h3>
-                                        <p>Sustainable Food Supply from Land to Sea</p>
-                                    </div>
-                                    <a href="tumbara.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item agri">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Bagi Kopi</h3>
-                                        <p>Community-Driven Coffee & Social Hub Chain</p>
-                                    </div>
-                                    <a href="bagi-kopi.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item agri">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Kutani Farm</h3>
-                                        <p>Export-Oriented Sustainable Horticulture Platform</p>
-                                    </div>
-                                    <a href="kutani-farm.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item education">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Darul Hikam</h3>
-                                        <p>Educational Community for Character & Academic Excellence</p>
-                                    </div>
-                                    <a href="darul-hikam.html" class="link"></a>
-                                </div>
-                            </div>
-
-                            <div class="single-item one-item property">
-                                <div class="item">
-
-                                    <div class="content">
-                                        <h3>Pertiwi Land</h3>
-                                        <p>Sustainable & Accessible Residential Property Development</p>
-                                    </div>
-                                    <a href="pertiwi-land.html" class="link"></a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-                </div>
-                <div class="container padding-onlybottom-lg" style="margin-top: 50px;">
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <h3 class="margin-bottom-small">Sectors We Are Looking For</h3>
-                            <ul class="styled-list">
-                                <li><i class="fa fa-trash"></i> Waste Management</li>
-                                <li><i class="fa fa-cutlery"></i> Food & Beverages</li>
-                                <li><i class="fa fa-leaf"></i> Agriculture</li>
-                                <li><i class="fa fa-graduation-cap"></i> Education</li>
-                                <li><i class="fa fa-home"></i> Property</li>
-                                <li><i class="fa fa-medkit"></i> Health</li>
-
-                            </ul>
-                        </div>
-                        <div class="col-md-6 text-center">
-                            <h3 class="margin-bottom-small">Arunami 5 Investment Thesis</h3>
-                            <ul class="styled-list">
-                                <li><i class="fa fa-users"></i> 3F (Founders, Fundamental, Financial)</li>
-                                <li><i class="fa fa-rocket"></i> Ready-to-Grow Phase of Businesses</li>
-                                <li><i class="fa fa-handshake-o"></i> Project based investment : JO / JV</li>
-                                <li><i class="fa fa-money"></i> Dividend / Profit Sharing Based</li>
-                                <li><i class="fa fa-calendar-check-o"></i> Long Term Partnerships</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="cta-section">
-                    <div class="container">
-                        <h3>Business Owner or Investor? We love to get connected.</h3>
-                        <p>We'll get back to you with feedback within a few days.</p>
-                        <a href="https://linkedin.com/company/arunami-venture" class="btn-alt">Get In Touch</a>
-                    </div>
-                </div>
-
+            <div class="mandate-footer reveal">
+                <p>Return is essential. <span style="color: var(--color-accent);">Legacy is decisive.</span></p>
             </div>
         </div>
-    </div>
-    <footer id="contact">
-        <div class="container">
-            <div class="row no-margin">
-                <div class="col-md-4 text">
-                    <h5>PT Aruna Mentari Inovasi (ARUNAMI)</h5>
-                    <p>© 2025 Arunami. All Rights Reserved.</p>
+    </section>
+
+    <!-- Investment Focus Section -->
+    <section id="focus">
+        <div class="focus-container">
+            <div class="reveal">
+                <span class="section-label">Investment Focus</span>
+                <h2 class="section-title">Sectors Fundamental to <span>Societal Progress</span></h2>
+                <p style="max-width: 600px; color: var(--color-text-muted); margin-top: 1rem;">We selectively partner
+                    with growth-stage companies in sectors that drive meaningful change. Each allocation is grounded in
+                    disciplined underwriting and active oversight.</p>
+            </div>
+            <div class="focus-grid">
+                <div class="focus-item reveal">
+                    <i class="focus-icon fa-solid fa-graduation-cap"></i>
+                    <h4>Education</h4>
                 </div>
-                <div class="col-md-4 text small">
-                    <p><strong>Contact Us</strong><br>
-                        contact@arunami.id<br>
-                    </p>
+                <div class="focus-item reveal">
+                    <i class="focus-icon fa-solid fa-heart-pulse"></i>
+                    <h4>Healthcare</h4>
                 </div>
-                <div class="col-md-4 text">
-                    <div class="row no-margin">
-                        <ul class="social">
-                            <li><a href="https://linkedin.com/company/arunami-venture" target="_blank"
-                                    rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa fa-linkedin"
-                                        aria-hidden="true"></i></a></li>
-                            <li><a href="https://instagram.com/arunami.id" target="_blank" rel="noopener noreferrer"
-                                    aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        </ul>
+                <div class="focus-item reveal">
+                    <i class="focus-icon fa-solid fa-bag-shopping"></i>
+                    <h4>Consumer & Retail</h4>
+                </div>
+                <div class="focus-item reveal">
+                    <i class="focus-icon fa-solid fa-utensils"></i>
+                    <h4>Food & Beverage</h4>
+                </div>
+                <div class="focus-item reveal">
+                    <i class="focus-icon fa-solid fa-seedling"></i>
+                    <h4>Agriculture</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section class="approach" id="approach">
+        <div class="approach-container">
+            <div class="approach-header reveal">
+                <span class="section-label">Our Approach</span>
+                <h2 class="section-title">Not Passive Capital.<br><span>Responsible Stewards.</span></h2>
+            </div>
+            <div class="approach-grid">
+                <div class="approach-item reveal">
+                    <div class="approach-number">01</div>
+                    <div>
+                        <h3>Long-Term Alignment</h3>
+                        <p>Structured profit-sharing frameworks aligned with operators and stakeholders, ensuring shared
+                            success across generations.</p>
+                    </div>
+                </div>
+                <div class="approach-item reveal">
+                    <div class="approach-number">02</div>
+                    <div>
+                        <h3>Governance Architecture</h3>
+                        <p>Institutional-grade controls, financial transparency, and risk management systems that
+                            protect and enhance value.</p>
+                    </div>
+                </div>
+                <div class="approach-item reveal">
+                    <div class="approach-number">03</div>
+                    <div>
+                        <h3>Active Stewardship</h3>
+                        <p>Strategic guidance, capital discipline, and performance accountability. We are engaged
+                            partners, not distant shareholders.</p>
+                    </div>
+                </div>
+                <div class="approach-item reveal">
+                    <div class="approach-number">04</div>
+                    <div>
+                        <h3>Measured Impact</h3>
+                        <p>Clear KPIs that balance commercial strength with societal contribution. Every investment is
+                            accountable to both.</p>
                     </div>
                 </div>
             </div>
+            <div class="approach-footer reveal">
+                <p>We are not passive capital. We are <span style="color: var(--color-accent-light);">responsible
+                        stewards.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section id="performance">
+        <div class="performance-container">
+            <div class="reveal">
+                <span class="section-label">Portfolio & Performance</span>
+                <h2 class="section-title">Consistency Over <span>Volatility</span></h2>
+            </div>
+            <div class="performance-highlight reveal">
+                <div class="perf-stats">
+                    <div class="perf-stat">
+                        <div class="perf-value">28%+</div>
+                        <div class="perf-label">Annual Returns</div>
+                    </div>
+                    <div class="perf-stat">
+                        <div class="perf-value">Multi-M</div>
+                        <div class="perf-label">AUM in USD</div>
+                    </div>
+                    <div class="perf-stat">
+                        <div class="perf-value">5+</div>
+                        <div class="perf-label">Resilient Sectors</div>
+                    </div>
+                </div>
+                <p class="performance-text">By the end of 2025, Arunami manages a diversified multi-million dollar
+                    portfolio across resilient sectors, delivering annual returns exceeding 28% while maintaining
+                    governance rigor and disciplined capital allocation.</p>
+                <p class="performance-footer">Precision over expansion for its own sake.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners" id="partners">
+        <div class="partners-container">
+            <div class="reveal" style="text-align: center; max-width: 700px; margin: 0 auto 5rem;">
+                <span class="section-label">Partnership</span>
+                <h2 class="section-title">For Those Who Think <span>Generationally</span></h2>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card reveal">
+                    <span class="partner-label">For Founders</span>
+                    <h3>Build With Patient Capital</h3>
+                    <p>We partner with operators who think generationally. If your business demonstrates strong
+                        fundamentals, ethical leadership, and scalable potential — we bring patient capital, strategic
+                        clarity, and structured growth.</p>
+                    <ul class="partner-features">
+                        <li>Patient Capital</li>
+                        <li>Strategic Clarity</li>
+                        <li>Structured Growth</li>
+                        <li>Active Partnership</li>
+                    </ul>
+                    <p class="partner-cta">We invest in character as much as capability.</p>
+                </div>
+                <div class="partner-card reveal">
+                    <span class="partner-label">For Capital Partners</span>
+                    <h3>Measured Performance</h3>
+                    <p>Arunami offers exposure to high-growth real-sector businesses through a governance-led,
+                        profit-sharing structure designed for long-term resilience.</p>
+                    <ul class="partner-features">
+                        <li>Transparent Reporting</li>
+                        <li>Active Oversight</li>
+                        <li>Risk-Aware Allocation</li>
+                        <li>Alignment by Design</li>
+                    </ul>
+                    <p class="partner-cta">Enduring partnerships. Measured performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="philosophy-container reveal">
+            <span class="section-label">Our Philosophy</span>
+            <blockquote>Capital should not merely circulate.<br>It should <span>cultivate</span>.</blockquote>
+            <p class="philosophy-text">We steward resources today to strengthen tomorrow.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-container reveal">
+            <h2 class="cta-title">Partner With Intention</h2>
+            <p class="cta-subtitle">Arunami — Impact. Discipline. Legacy.</p>
+            <div class="cta-buttons">
+                <a href="https://www.linkedin.com/company/arunami-venture" target="_blank" class="btn-primary">Engage
+                    With Us</a>
+                <a href="https://www.linkedin.com/company/arunami-venture" target="_blank" class="btn-secondary">Explore
+                    Partnership</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo"><img src="ArunamiLogo.svg" alt="Arunami" style="height: 80px; width: auto;"></div>
+            <div class="footer-links">
+                <a href="#mandate">Mandate</a>
+                <a href="#focus">Focus</a>
+                <a href="#approach">Approach</a>
+                <a href="#partners">Partners</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-copyright">© 2025 Arunami. All rights reserved.</div>
         </div>
     </footer>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.flexslider-min.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/isotope.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <!-- Google Maps API removed - add back with valid API key if needed -->
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/smooth.scroll.min.js"></script>
-    <script src="assets/js/jquery.appear.js"></script>
-    <script src="assets/js/jquery.countTo.js"></script>
-    <script src="assets/js/jquery.scrolly.js"></script>
-    <script src="assets/js/plugins-scroll.js"></script>
-    <script src="assets/js/imagesloaded.min.js"></script>
-    <script src="assets/js/pace.min.js"></script>
-    <script src="assets/js/main.js"></script>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                navbar.classList.remove('hero-nav');
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.add('hero-nav');
+            }
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Staggered reveal animation
+        const staggerReveal = () => {
+            const pillars = document.querySelectorAll('.pillar');
+            const focusItems = document.querySelectorAll('.focus-item');
+
+            pillars.forEach((pillar, index) => {
+                pillar.style.transitionDelay = `${index * 0.15}s`;
+            });
+
+            focusItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.1}s`;
+            });
+        };
+
+        staggerReveal();
+    </script>
+
 </body>
 
 </html>
