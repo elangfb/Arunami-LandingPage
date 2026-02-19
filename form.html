@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get in Touch | Arunami</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-alt: #f8faf9;
+            --color-bg-dark: #0d1f17;
+            --color-text: #1a2e23;
+            --color-text-light: #ffffff;
+            --color-text-muted: #5a6e62;
+            --color-accent: #1e5f3f;
+            --color-accent-light: #2a7a52;
+            --color-accent-soft: rgba(30, 95, 63, 0.08);
+            --color-border: rgba(30, 95, 63, 0.12);
+            --color-border-light: rgba(255, 255, 255, 0.15);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 4rem;
+            box-shadow: 0 1px 0 var(--color-border);
+        }
+
+        nav.hero-nav .nav-links a {
+            color: var(--color-text-light);
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--color-text);
+        }
+
+        nav.hero-nav .nav-cta {
+            border-color: var(--color-text-light);
+            color: var(--color-text-light);
+        }
+
+        nav.scrolled .nav-cta {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+
+        nav.hero-nav .logo img {
+            filter: brightness(0) invert(1);
+        }
+
+        nav.scrolled .logo img {
+            filter: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        /* Hamburger Toggle */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 200;
+            width: 30px;
+            height: 24px;
+            position: relative;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--color-text-light);
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .nav-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nav-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        nav.scrolled .nav-toggle span {
+            background: var(--color-text);
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--color-accent-light);
+        }
+
+        .nav-cta {
+            background: transparent;
+            border: 1px solid;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled .nav-cta:hover {
+            background: var(--color-accent);
+            color: var(--color-text-light);
+        }
+
+        nav.hero-nav .nav-cta:hover {
+            background: var(--color-text-light);
+            color: var(--color-bg-dark);
+        }
+
+        /* Hero Header */
+        .form-hero {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10rem 2rem 4rem;
+            position: relative;
+            background: linear-gradient(165deg, var(--color-bg-dark) 0%, #153d2a 50%, var(--color-accent) 100%);
+            color: var(--color-text-light);
+        }
+
+        .form-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(42, 122, 82, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(30, 95, 63, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .form-hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .form-hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-hero-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.5));
+            margin: 0 auto 2rem;
+            opacity: 0;
+            animation: lineReveal 1.5s ease 0.3s forwards;
+        }
+
+        .form-hero-tagline {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .form-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+
+        .form-hero h1 span {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .form-hero-subtitle {
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        @keyframes lineReveal {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 6rem 4rem;
+            position: relative;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+
+        .form-group label .required {
+            color: #c0392b;
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--color-text);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            outline: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 20px rgba(30, 95, 63, 0.08);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6e62' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            padding-right: 3rem;
+        }
+
+        .form-group select option {
+            font-family: var(--font-body);
+            padding: 0.5rem;
+        }
+
+        .form-group textarea {
+            min-height: 160px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn-submit {
+            background: var(--color-accent);
+            color: var(--color-text-light);
+            padding: 1.4rem 4rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            min-width: 220px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 95, 63, 0.2);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-submit .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        .btn-submit.loading .btn-text {
+            visibility: hidden;
+        }
+
+        .btn-submit.loading .spinner {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Success & Error Messages */
+        .form-message {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .form-message.success {
+            display: block;
+            background: var(--color-accent-soft);
+            border: 1px solid var(--color-accent);
+        }
+
+        .form-message.error {
+            display: block;
+            background: rgba(192, 57, 43, 0.05);
+            border: 1px solid rgba(192, 57, 43, 0.2);
+        }
+
+        .form-message h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-message.success h3 {
+            color: var(--color-accent);
+        }
+
+        .form-message.error h3 {
+            color: #c0392b;
+        }
+
+        .form-message p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Decorative divider */
+        .form-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+            margin: 0 auto 3rem;
+        }
+
+        .form-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .form-intro p {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--color-text-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid var(--color-border);
+            background: var(--color-bg);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            color: var(--color-text);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            nav.scrolled {
+                padding: 1rem 2rem;
+            }
+
+            .form-section {
+                padding: 4rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Show hamburger */
+            .nav-toggle {
+                display: block;
+            }
+
+            /* Mobile nav menu overlay */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--color-bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                padding: 5rem 2rem;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 150;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.open {
+                right: 0;
+            }
+
+            /* Overlay backdrop */
+            .nav-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 140;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .nav-overlay.open {
+                display: block;
+                opacity: 1;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .nav-links a {
+                color: var(--color-text-light) !important;
+                font-size: 1.1rem;
+                letter-spacing: 0.15em;
+                padding: 0.5rem 1rem;
+            }
+
+            .nav-menu .nav-cta {
+                border-color: var(--color-text-light);
+                color: var(--color-text-light);
+                padding: 1rem 2.5rem;
+                font-size: 0.85rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Spacing */
+            nav {
+                padding: 1.2rem 1.5rem;
+            }
+
+            nav.scrolled {
+                padding: 0.8rem 1.5rem;
+            }
+
+            /* Logo */
+            .logo img {
+                height: 50px;
+            }
+
+            /* Hero */
+            .form-hero {
+                padding: 8rem 1.5rem 3rem;
+                min-height: 35vh;
+            }
+
+            .form-hero::after {
+                width: 300px;
+                height: 300px;
+            }
+
+            /* Form */
+            .form-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 1rem 1.2rem;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            /* Footer */
+            footer {
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-logo img {
+                height: 50px !important;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-hero {
+                padding: 7rem 1.2rem 2.5rem;
+            }
+
+            .form-hero h1 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .form-section {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .form-group {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="hero-nav">
+        <a href="index.html" class="logo"><img src="ArunamiLogo.svg" alt="Arunami"></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-menu" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="index.html#mandate">Mandate</a></li>
+                <li><a href="index.html#focus">Focus</a></li>
+                <li><a href="index.html#approach">Approach</a></li>
+                <li><a href="index.html#partners">Partners</a></li>
+            </ul>
+            <a href="form.html" class="nav-cta">Get in Touch</a>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Hero Header -->
+    <section class="form-hero">
+        <div class="form-hero-content">
+            <div class="form-hero-line"></div>
+            <p class="form-hero-tagline">We'd Love to Hear From You</p>
+            <h1>Get in <span>Touch</span></h1>
+            <p class="form-hero-subtitle">Share your vision with us. Let's explore how we can build something
+                meaningful together.</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-container">
+            <div class="form-intro">
+                <div class="form-divider"></div>
+                <p>Tell us about yourself and how we can partner with you.</p>
+            </div>
+
+            <form id="contactForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type <span class="required">*</span></label>
+                    <select id="type" name="type" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
+                        <option value="Investor">Investor</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">Company / Organization</label>
+                    <input type="text" id="company" name="company" placeholder="Your company or organization">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp Number <span class="required">*</span></label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 628123456789" pattern="[0-9]+"
+                        inputmode="numeric" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">How can Arunami help you? <span class="required">*</span></label>
+                    <textarea id="message" name="message"
+                        placeholder="Tell us about your goals, vision, or how we can support you..."
+                        required></textarea>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <span class="btn-text">Submit</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+
+                <div class="form-message" id="formMessage">
+                    <h3 id="messageTitle"></h3>
+                    <p id="messageText"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo"><img src="ArunamiLogo.svg" alt="Arunami" style="height: 80px; width: auto;"></div>
+            <div class="footer-links">
+                <a href="index.html#mandate">Mandate</a>
+                <a href="index.html#focus">Focus</a>
+                <a href="index.html#approach">Approach</a>
+                <a href="index.html#partners">Partners</a>
+                <a href="form.html">Contact</a>
+            </div>
+            <div class="footer-copyright">© 2025 Arunami. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- Firebase: config is loaded from firebase-config.js (gitignored) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+        import firebaseConfig from "./firebase-config.js";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Form Elements
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const messageTitle = document.getElementById('messageTitle');
+        const messageText = document.getElementById('messageText');
+
+        // WhatsApp field — numbers only
+        const whatsappInput = document.getElementById('whatsapp');
+        whatsappInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        // Form Submit
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Basic validation
+            const name = document.getElementById('name').value.trim();
+            const type = document.getElementById('type').value;
+            const company = document.getElementById('company').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const whatsapp = whatsappInput.value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !type || !email || !whatsapp || !message) {
+                showMessage('error', 'Missing Fields', 'Please fill in all required fields.');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('error', 'Invalid Email', 'Please enter a valid email address.');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            formMessage.className = 'form-message';
+
+            try {
+                // Wrap addDoc with a timeout to prevent infinite loading
+                const timeoutMs = 15000;
+                const submitPromise = addDoc(collection(db, "form_submissions"), {
+                    name,
+                    type,
+                    company,
+                    email,
+                    whatsapp,
+                    message,
+                    submittedAt: serverTimestamp(),
+                    status: "new"
+                });
+
+                const timeoutPromise = new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Request timed out. Please check your internet connection and try again.')), timeoutMs)
+                );
+
+                await Promise.race([submitPromise, timeoutPromise]);
+
+                showMessage('success', 'Thank You', 'Your message has been received. We will get back to you shortly.');
+                form.reset();
+            } catch (error) {
+                console.error("Error submitting form:", error);
+                const errorMsg = error.message && error.message.includes('timed out')
+                    ? error.message
+                    : 'Please try again later or contact us directly.';
+                showMessage('error', 'Something Went Wrong', errorMsg);
+            } finally {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        function showMessage(type, title, text) {
+            formMessage.className = `form-message ${type}`;
+            messageTitle.textContent = title;
+            messageText.textContent = text;
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+
+    <script>
+        // Hamburger menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function openMenu() {
+            navToggle.classList.add('open');
+            navMenu.classList.add('open');
+            navOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            navToggle.classList.remove('open');
+            navMenu.classList.remove('open');
+            navOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        navToggle.addEventListener('click', () => {
+            if (navMenu.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        navOverlay.addEventListener('click', closeMenu);
+
+        // Close menu when nav link clicked
+        navMenu.querySelectorAll('.nav-links a, .nav-cta').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+                navbar.classList.remove('hero-nav');
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.add('hero-nav');
+            }
+            if (navMenu.classList.contains('open')) {
+                closeMenu();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

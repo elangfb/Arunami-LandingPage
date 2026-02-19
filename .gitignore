@@ -1,0 +1,5 @@
+# Firebase config (contains API keys)
+firebase-config.js
+
+# Dependencies
+node_modules/

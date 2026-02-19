@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Arunami</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-bg-alt: #f8faf9;
+            --color-bg-dark: #0d1f17;
+            --color-text: #1a2e23;
+            --color-text-light: #ffffff;
+            --color-text-muted: #5a6e62;
+            --color-accent: #1e5f3f;
+            --color-accent-light: #2a7a52;
+            --color-accent-soft: rgba(30, 95, 63, 0.08);
+            --color-border: rgba(30, 95, 63, 0.12);
+            --color-border-light: rgba(255, 255, 255, 0.15);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+            --color-new: #2a7a52;
+            --color-reviewed: #c78b2d;
+            --color-contacted: #2d6bc7;
+            --color-danger: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg-alt);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-weight: 300;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Subtle Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* ===================== LOGIN SCREEN ===================== */
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(165deg, var(--color-bg-dark) 0%, #153d2a 50%, var(--color-accent) 100%);
+            position: relative;
+        }
+
+        .login-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(42, 122, 82, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(30, 95, 63, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .login-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 3.5rem 3rem;
+            width: 100%;
+            max-width: 420px;
+            margin: 1rem;
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .login-logo img {
+            height: 60px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .login-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 0.3rem 1rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .login-card h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card .login-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-field label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.6rem;
+        }
+
+        .login-field input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 300;
+            color: var(--color-text-light);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-field input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .login-field input:focus {
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--color-accent-light);
+            color: var(--color-text-light);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 52px;
+        }
+
+        .login-btn:hover:not(:disabled) {
+            background: var(--color-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login-btn .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        .login-btn.loading .btn-text {
+            visibility: hidden;
+        }
+
+        .login-btn.loading .spinner {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .login-error {
+            display: none;
+            text-align: center;
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .login-error.show {
+            display: block;
+            animation: fadeUp 0.3s ease;
+        }
+
+        /* ===================== ADMIN HEADER ===================== */
+        .admin-header {
+            background: var(--color-bg-dark);
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .admin-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .admin-header-left img {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .admin-header-left .admin-badge {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            padding: 0.25rem 0.8rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .admin-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .admin-user {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+
+        .admin-user i {
+            margin-right: 0.4rem;
+        }
+
+        .btn-signout {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 0.5rem 1.2rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signout:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--color-text-light);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===================== DASHBOARD ===================== */
+        .admin-dashboard {
+            display: none;
+        }
+
+        .admin-dashboard.active {
+            display: block;
+        }
+
+        .dashboard-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--color-bg);
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--color-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            box-shadow: 0 4px 20px rgba(30, 95, 63, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .stat-card.entrepreneurs .stat-value {
+            color: var(--color-new);
+        }
+
+        .stat-card.investors .stat-value {
+            color: var(--color-reviewed);
+        }
+
+        .stat-card.others .stat-value {
+            color: var(--color-contacted);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background: var(--color-bg);
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.8rem;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--color-text);
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--color-accent);
+        }
+
+        .search-box input::placeholder {
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        .filter-select {
+            padding: 0.7rem 2.5rem 0.7rem 1rem;
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-text);
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6e62' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            border-color: var(--color-accent);
+        }
+
+        .btn-toolbar {
+            padding: 0.7rem 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid var(--color-border);
+            background: var(--color-bg-alt);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-toolbar:hover {
+            background: var(--color-accent);
+            color: var(--color-text-light);
+            border-color: var(--color-accent);
+        }
+
+        .btn-toolbar i {
+            font-size: 0.8rem;
+        }
+
+        /* Submissions Table */
+        .submissions-card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .submissions-table thead th {
+            background: var(--color-bg-alt);
+            padding: 1rem 1.2rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        .submissions-table tbody tr {
+            border-bottom: 1px solid var(--color-border);
+            transition: background 0.2s ease;
+            cursor: pointer;
+        }
+
+        .submissions-table tbody tr:hover {
+            background: var(--color-accent-soft);
+        }
+
+        .submissions-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .submissions-table tbody td {
+            padding: 1rem 1.2rem;
+            font-size: 0.88rem;
+            vertical-align: middle;
+        }
+
+        .td-name {
+            font-weight: 400;
+        }
+
+        .td-name .company {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            font-weight: 300;
+        }
+
+        .td-type {
+            white-space: nowrap;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            border-radius: 2px;
+        }
+
+        .type-badge.entrepreneur {
+            background: rgba(42, 122, 82, 0.1);
+            color: var(--color-new);
+        }
+
+        .type-badge.investor {
+            background: rgba(199, 139, 45, 0.1);
+            color: var(--color-reviewed);
+        }
+
+        .type-badge.others {
+            background: rgba(45, 107, 199, 0.1);
+            color: var(--color-contacted);
+        }
+
+        .td-contact a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .td-contact a:hover {
+            color: var(--color-accent-light);
+        }
+
+        .td-contact .wa-link {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 2px;
+        }
+
+        .td-contact .wa-link:hover {
+            color: var(--color-new);
+        }
+
+        /* Status badge */
+        .status-select {
+            padding: 0.3rem 1.8rem 0.3rem 0.6rem;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            border: 1px solid;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%235a6e62' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            transition: all 0.2s ease;
+        }
+
+        .status-select.status-new {
+            background-color: rgba(42, 122, 82, 0.08);
+            border-color: rgba(42, 122, 82, 0.3);
+            color: var(--color-new);
+        }
+
+        .status-select.status-reviewed {
+            background-color: rgba(199, 139, 45, 0.08);
+            border-color: rgba(199, 139, 45, 0.3);
+            color: var(--color-reviewed);
+        }
+
+        .status-select.status-contacted {
+            background-color: rgba(45, 107, 199, 0.08);
+            border-color: rgba(45, 107, 199, 0.3);
+            color: var(--color-contacted);
+        }
+
+        .td-date {
+            font-size: 0.82rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        .td-actions {
+            white-space: nowrap;
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: 1px solid rgba(192, 57, 43, 0.2);
+            color: var(--color-danger);
+            padding: 0.35rem 0.7rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+
+        .btn-delete:hover {
+            opacity: 1;
+            background: rgba(192, 57, 43, 0.08);
+            border-color: var(--color-danger);
+        }
+
+        /* Expanded Row */
+        .expanded-row {
+            display: none;
+        }
+
+        .expanded-row.show {
+            display: table-row;
+        }
+
+        .expanded-row td {
+            padding: 0 !important;
+        }
+
+        .expanded-content {
+            padding: 1.5rem 1.5rem 1.5rem 3rem;
+            background: var(--color-bg-alt);
+            border-top: 1px dashed var(--color-border);
+            animation: slideDown 0.3s ease;
+        }
+
+        .expanded-content .message-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .expanded-content .message-text {
+            font-size: 0.92rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            white-space: pre-wrap;
+            max-width: 800px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--color-border);
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Loading State */
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .loading-state .spinner-large {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--color-border);
+            border-top-color: var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        .loading-state p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Results count */
+        .results-info {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-bg);
+        }
+
+        /* Delete confirmation modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--color-bg);
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .modal-card i {
+            font-size: 2.5rem;
+            color: var(--color-danger);
+            margin-bottom: 1rem;
+        }
+
+        .modal-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 0.8rem 2rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border: 1px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-modal-cancel {
+            background: transparent;
+            border-color: var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .btn-modal-cancel:hover {
+            border-color: var(--color-text);
+            color: var(--color-text);
+        }
+
+        .btn-modal-danger {
+            background: var(--color-danger);
+            border-color: var(--color-danger);
+            color: var(--color-text-light);
+        }
+
+        .btn-modal-danger:hover {
+            background: #a93226;
+            border-color: #a93226;
+            transform: translateY(-1px);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left: 3px solid var(--color-new);
+        }
+
+        .toast.error {
+            border-left: 3px solid var(--color-danger);
+        }
+
+        /* ===================== RESPONSIVE ===================== */
+        @media (max-width: 1024px) {
+            .dashboard-content {
+                padding: 1.5rem;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 1rem 1.2rem;
+            }
+
+            .admin-header-left .admin-badge {
+                display: none;
+            }
+
+            .admin-user {
+                display: none;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .stat-card {
+                padding: 1.2rem;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+
+            .toolbar {
+                padding: 1rem;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .filter-select {
+                flex: 1;
+            }
+
+            /* Table -> Card layout on mobile */
+            .submissions-table thead {
+                display: none;
+            }
+
+            .submissions-table tbody tr {
+                display: block;
+                padding: 1.2rem;
+                margin-bottom: 0;
+            }
+
+            .submissions-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.4rem 0;
+                font-size: 0.85rem;
+            }
+
+            .submissions-table tbody td::before {
+                content: attr(data-label);
+                font-size: 0.65rem;
+                font-weight: 500;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--color-text-muted);
+                flex-shrink: 0;
+                margin-right: 1rem;
+            }
+
+            .expanded-content {
+                padding: 1.2rem;
+            }
+
+            .results-info {
+                padding: 0.8rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-header-left img {
+                height: 30px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .modal-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .btn-modal {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== LOGIN SCREEN ========== -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="ArunamiLogo.svg" alt="Arunami">
+                <br>
+                <span class="login-badge">Admin Panel</span>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="login-subtitle">Sign in to manage submissions</p>
+
+            <form id="loginForm">
+                <div class="login-field">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="admin@arunami.com" required>
+                </div>
+                <div class="login-field">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="spinner"></div>
+                </button>
+                <div class="login-error" id="loginError"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========== ADMIN DASHBOARD ========== -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <header class="admin-header">
+            <div class="admin-header-left">
+                <img src="ArunamiLogo.svg" alt="Arunami">
+                <span class="admin-badge">Admin</span>
+            </div>
+            <div class="admin-header-right">
+                <span class="admin-user" id="adminEmail"><i class="fas fa-user-circle"></i> admin</span>
+                <button class="btn-signout" id="signOutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Stats -->
+            <div class="stats-row" id="statsRow">
+                <div class="stat-card">
+                    <div class="stat-label">Total Submissions</div>
+                    <div class="stat-value" id="statTotal">—</div>
+                </div>
+                <div class="stat-card entrepreneurs">
+                    <div class="stat-label">Entrepreneurs</div>
+                    <div class="stat-value" id="statEntrepreneur">—</div>
+                </div>
+                <div class="stat-card investors">
+                    <div class="stat-label">Investors</div>
+                    <div class="stat-value" id="statInvestor">—</div>
+                </div>
+                <div class="stat-card others">
+                    <div class="stat-label">Others</div>
+                    <div class="stat-value" id="statOthers">—</div>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search by name, email, company, or message...">
+                </div>
+                <select class="filter-select" id="filterType">
+                    <option value="">All Types</option>
+                    <option value="Entrepreneur">Entrepreneur</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Others">Others</option>
+                </select>
+                <select class="filter-select" id="filterStatus">
+                    <option value="">All Status</option>
+                    <option value="new">New</option>
+                    <option value="reviewed">Reviewed</option>
+                    <option value="contacted">Contacted</option>
+                </select>
+                <button class="btn-toolbar" id="exportBtn">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+
+            <!-- Table -->
+            <div class="submissions-card">
+                <div class="results-info" id="resultsInfo">Loading submissions...</div>
+
+                <div class="loading-state" id="loadingState">
+                    <div class="spinner-large"></div>
+                    <p>Loading submissions...</p>
+                </div>
+
+                <div class="empty-state" id="emptyState" style="display:none;">
+                    <i class="fas fa-inbox"></i>
+                    <h3>No Submissions Found</h3>
+                    <p>Try adjusting your filters or check back later.</p>
+                </div>
+
+                <table class="submissions-table" id="submissionsTable" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-card">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Delete Submission</h3>
+            <p>This action cannot be undone. Are you sure you want to permanently delete this submission?</p>
+            <div class="modal-actions">
+                <button class="btn-modal btn-modal-cancel" id="cancelDelete">Cancel</button>
+                <button class="btn-modal btn-modal-danger" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+        import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+        import firebaseConfig from "./firebase-config.js";
+
+        // ── Firebase Init ──
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // ── DOM References ──
+        const loginScreen = document.getElementById('loginScreen');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+        const signOutBtn = document.getElementById('signOutBtn');
+        const adminEmailEl = document.getElementById('adminEmail');
+        const searchInput = document.getElementById('searchInput');
+        const filterType = document.getElementById('filterType');
+        const filterStatus = document.getElementById('filterStatus');
+        const exportBtn = document.getElementById('exportBtn');
+        const tableBody = document.getElementById('tableBody');
+        const submissionsTable = document.getElementById('submissionsTable');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+        const resultsInfo = document.getElementById('resultsInfo');
+        const deleteModal = document.getElementById('deleteModal');
+        const cancelDeleteBtn = document.getElementById('cancelDelete');
+        const confirmDeleteBtn = document.getElementById('confirmDelete');
+        const toastEl = document.getElementById('toast');
+
+        let allSubmissions = [];
+        let deleteTargetId = null;
+        let unsubscribeSnapshot = null;
+
+        // ── Auth State ──
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginScreen.style.display = 'none';
+                adminDashboard.classList.add('active');
+                adminEmailEl.innerHTML = `<i class="fas fa-user-circle"></i> ${user.email}`;
+                startListening();
+            } else {
+                loginScreen.style.display = 'flex';
+                adminDashboard.classList.remove('active');
+                if (unsubscribeSnapshot) {
+                    unsubscribeSnapshot();
+                    unsubscribeSnapshot = null;
+                }
+            }
+        });
+
+        // ── Login ──
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            loginBtn.classList.add('loading');
+            loginBtn.disabled = true;
+            loginError.classList.remove('show');
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (err) {
+                let msg = 'Invalid email or password.';
+                if (err.code === 'auth/too-many-requests') msg = 'Too many attempts. Please try again later.';
+                if (err.code === 'auth/network-request-failed') msg = 'Network error. Check your connection.';
+                loginError.textContent = msg;
+                loginError.classList.add('show');
+            } finally {
+                loginBtn.classList.remove('loading');
+                loginBtn.disabled = false;
+            }
+        });
+
+        // ── Sign Out ──
+        signOutBtn.addEventListener('click', () => {
+            signOut(auth);
+        });
+
+        // ── Firestore Real-time ──
+        function startListening() {
+            const q = query(collection(db, 'form_submissions'), orderBy('submittedAt', 'desc'));
+            unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+                allSubmissions = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+                updateStats();
+                renderTable();
+            }, (error) => {
+                console.error('Firestore error:', error);
+                showToast('error', 'Failed to load submissions.');
+            });
+        }
+
+        // ── Stats ──
+        function updateStats() {
+            document.getElementById('statTotal').textContent = allSubmissions.length;
+            document.getElementById('statEntrepreneur').textContent = allSubmissions.filter(s => s.type === 'Entrepreneur').length;
+            document.getElementById('statInvestor').textContent = allSubmissions.filter(s => s.type === 'Investor').length;
+            document.getElementById('statOthers').textContent = allSubmissions.filter(s => s.type === 'Others').length;
+        }
+
+        // ── Filtering ──
+        function getFiltered() {
+            const q = searchInput.value.toLowerCase();
+            const typeFilter = filterType.value;
+            const statusFilter = filterStatus.value;
+
+            return allSubmissions.filter(s => {
+                const matchesSearch = !q ||
+                    (s.name || '').toLowerCase().includes(q) ||
+                    (s.email || '').toLowerCase().includes(q) ||
+                    (s.company || '').toLowerCase().includes(q) ||
+                    (s.message || '').toLowerCase().includes(q);
+                const matchesType = !typeFilter || s.type === typeFilter;
+                const matchesStatus = !statusFilter || s.status === statusFilter;
+                return matchesSearch && matchesType && matchesStatus;
+            });
+        }
+
+        // ── Render Table ──
+        function renderTable() {
+            const filtered = getFiltered();
+            loadingState.style.display = 'none';
+
+            if (filtered.length === 0) {
+                submissionsTable.style.display = 'none';
+                emptyState.style.display = 'block';
+                resultsInfo.textContent = `0 submissions found`;
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            submissionsTable.style.display = 'table';
+            resultsInfo.textContent = `Showing ${filtered.length} of ${allSubmissions.length} submissions`;
+
+            tableBody.innerHTML = filtered.map(s => {
+                const date = s.submittedAt ? new Date(s.submittedAt.seconds * 1000) : null;
+                const dateStr = date ? date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+                const timeStr = date ? date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '';
+                const status = s.status || 'new';
+                const typeClass = s.type ? s.type.toLowerCase() : '';
+                const companyLine = s.company ? `<span class="company">${escHtml(s.company)}</span>` : '';
+
+                return `
+                <tr data-id="${s.id}" onclick="toggleExpand('${s.id}')">
+                    <td data-label="" style="width:30px;text-align:center;">
+                        <i class="fas fa-chevron-right" id="chevron-${s.id}" style="font-size:0.7rem;color:var(--color-text-muted);transition:transform 0.2s;"></i>
+                    </td>
+                    <td data-label="Name" class="td-name">${escHtml(s.name)}${companyLine}</td>
+                    <td data-label="Type" class="td-type"><span class="type-badge ${typeClass}">${escHtml(s.type)}</span></td>
+                    <td data-label="Contact" class="td-contact">
+                        <a href="mailto:${escHtml(s.email)}">${escHtml(s.email)}</a>
+                        <a href="https://wa.me/${escHtml(s.whatsapp)}" target="_blank" class="wa-link"><i class="fab fa-whatsapp"></i> ${escHtml(s.whatsapp)}</a>
+                    </td>
+                    <td data-label="Status">
+                        <select class="status-select status-${status}" onchange="updateStatus('${s.id}', this.value)" onclick="event.stopPropagation()">
+                            <option value="new" ${status === 'new' ? 'selected' : ''}>New</option>
+                            <option value="reviewed" ${status === 'reviewed' ? 'selected' : ''}>Reviewed</option>
+                            <option value="contacted" ${status === 'contacted' ? 'selected' : ''}>Contacted</option>
+                        </select>
+                    </td>
+                    <td data-label="Date" class="td-date">${dateStr}<br><small>${timeStr}</small></td>
+                    <td data-label="Actions" class="td-actions">
+                        <button class="btn-delete" onclick="event.stopPropagation(); promptDelete('${s.id}')" title="Delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="expanded-row" id="expand-${s.id}">
+                    <td colspan="7">
+                        <div class="expanded-content">
+                            <div class="message-label">Message</div>
+                            <div class="message-text">${escHtml(s.message)}</div>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        searchInput.addEventListener('input', renderTable);
+        filterType.addEventListener('change', renderTable);
+        filterStatus.addEventListener('change', renderTable);
+
+        // ── Toggle expand ──
+        window.toggleExpand = function (id) {
+            const expandRow = document.getElementById(`expand-${id}`);
+            const chevron = document.getElementById(`chevron-${id}`);
+            const isOpen = expandRow.classList.contains('show');
+
+            // Close all
+            document.querySelectorAll('.expanded-row.show').forEach(r => r.classList.remove('show'));
+            document.querySelectorAll('[id^="chevron-"]').forEach(c => c.style.transform = 'rotate(0deg)');
+
+            if (!isOpen) {
+                expandRow.classList.add('show');
+                chevron.style.transform = 'rotate(90deg)';
+            }
+        };
+
+        // ── Update status ──
+        window.updateStatus = async function (id, newStatus) {
+            try {
+                await updateDoc(doc(db, 'form_submissions', id), { status: newStatus });
+                showToast('success', `Status updated to ${newStatus}.`);
+            } catch (err) {
+                console.error('Error updating status:', err);
+                showToast('error', 'Failed to update status.');
+            }
+        };
+
+        // ── Delete ──
+        window.promptDelete = function (id) {
+            deleteTargetId = id;
+            deleteModal.classList.add('show');
+        };
+
+        cancelDeleteBtn.addEventListener('click', () => {
+            deleteModal.classList.remove('show');
+            deleteTargetId = null;
+        });
+
+        deleteModal.addEventListener('click', (e) => {
+            if (e.target === deleteModal) {
+                deleteModal.classList.remove('show');
+                deleteTargetId = null;
+            }
+        });
+
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (!deleteTargetId) return;
+            deleteModal.classList.remove('show');
+            try {
+                await deleteDoc(doc(db, 'form_submissions', deleteTargetId));
+                showToast('success', 'Submission deleted.');
+            } catch (err) {
+                console.error('Error deleting:', err);
+                showToast('error', 'Failed to delete submission.');
+            }
+            deleteTargetId = null;
+        });
+
+        // ── CSV Export ──
+        exportBtn.addEventListener('click', () => {
+            const filtered = getFiltered();
+            if (filtered.length === 0) {
+                showToast('error', 'No data to export.');
+                return;
+            }
+
+            const headers = ['Name', 'Type', 'Company', 'Email', 'WhatsApp', 'Message', 'Status', 'Date'];
+            const rows = filtered.map(s => {
+                const date = s.submittedAt ? new Date(s.submittedAt.seconds * 1000).toISOString() : '';
+                return [s.name, s.type, s.company || '', s.email, s.whatsapp, s.message, s.status || 'new', date]
+                    .map(v => `"${String(v).replace(/"/g, '""')}"`);
+            });
+
+            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `arunami-submissions-${new Date().toISOString().slice(0, 10)}.csv`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showToast('success', `Exported ${filtered.length} submissions.`);
+        });
+
+        // ── Toast ──
+        function showToast(type, message) {
+            toastEl.className = `toast ${type}`;
+            toastEl.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+            toastEl.classList.add('show');
+            setTimeout(() => toastEl.classList.remove('show'), 3500);
+        }
+
+        // ── Helpers ──
+        function escHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+    </script>
+
+</body>
+
+</html>
