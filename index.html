@@ -1137,7 +1137,6 @@
                 height: 350px;
             }
 
-
             .mandate-pillars {
                 grid-template-columns: 1fr;
             }
@@ -1164,6 +1163,11 @@
             /* Show hamburger */
             .nav-toggle {
                 display: block;
+            }
+
+            /* Keep X icon white when menu is open, even if scrolled */
+            nav.scrolled .nav-toggle.open span {
+                background: var(--color-text-light);
             }
 
             /* Mobile nav menu overlay */
@@ -1267,12 +1271,14 @@
 
             .hero-cta-group {
                 flex-direction: column;
+                align-items: center;
                 width: 100%;
                 max-width: 300px;
             }
 
             .hero-cta-group .btn-primary,
             .hero-cta-group .btn-secondary {
+                width: 100%;
                 text-align: center;
                 min-height: 44px;
                 display: flex;
@@ -1280,7 +1286,21 @@
                 justify-content: center;
             }
 
-            /* Focus grid */
+            /* Intro visual — flow stat overlay naturally */
+            .intro-visual {
+                height: auto;
+                min-height: 280px;
+            }
+
+            .stat-overlay {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                padding: 1.5rem;
+            }
+
+            /* Focus grid — center orphan 5th item */
             .focus-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
@@ -1288,6 +1308,12 @@
 
             .focus-item {
                 padding: 2rem 1rem;
+            }
+
+            .focus-item:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                max-width: 50%;
+                justify-self: center;
             }
 
             /* Pillars */
@@ -1299,6 +1325,7 @@
             .approach-item {
                 padding: 1.5rem;
                 gap: 1.5rem;
+                align-items: flex-start;
             }
 
             .approach-footer {
@@ -1313,6 +1340,11 @@
 
             .perf-value {
                 font-size: 2.8rem;
+            }
+
+            .perf-label {
+                word-break: break-word;
+                text-align: center;
             }
 
             .performance-highlight {
@@ -1398,17 +1430,32 @@
                 grid-template-columns: 1fr;
             }
 
-            .stat-overlay {
-                grid-template-columns: 1fr;
+            /* Reset orphan centering for single-column */
+            .focus-item:last-child:nth-child(odd) {
+                max-width: 100%;
+                grid-column: auto;
             }
 
+            .stat-overlay {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
 
             .perf-value {
                 font-size: 2.2rem;
             }
 
+            .perf-label {
+                font-size: 0.7rem;
+            }
+
+            /* Let blockquote text flow naturally on narrow screens */
             .philosophy blockquote {
                 font-size: clamp(1.4rem, 5vw, 1.8rem);
+            }
+
+            .philosophy blockquote br {
+                display: none;
             }
 
             .cta-title {
@@ -1417,8 +1464,9 @@
 
             .approach-item {
                 flex-direction: column;
+                align-items: flex-start;
                 gap: 1rem;
-                padding: 1.2rem;
+                padding: 1.5rem;
             }
 
             .approach-number {
@@ -1431,6 +1479,11 @@
 
             .scroll-indicator {
                 bottom: 1.5rem;
+            }
+
+            /* Footer logo sizing for small screens */
+            .footer-logo img {
+                height: 60px !important;
             }
         }
     </style>
