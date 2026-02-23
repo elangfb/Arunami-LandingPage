@@ -1147,6 +1147,7 @@
                 grid-template-columns: 1fr;
             }
 
+            /* Show all 5 focus items uniformly - no special treatment for Agriculture */
             .focus-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -1307,7 +1308,7 @@
                 padding: 1.5rem;
             }
 
-            /* Focus grid — center orphan 5th item */
+            /* Focus grid — all items uniform, no special orphan treatment */
             .focus-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
@@ -1315,12 +1316,6 @@
 
             .focus-item {
                 padding: 2rem 1rem;
-            }
-
-            .focus-item:last-child:nth-child(odd) {
-                grid-column: 1 / -1;
-                max-width: 50%;
-                justify-self: center;
             }
 
             /* Pillars */
@@ -1433,14 +1428,9 @@
                 font-size: clamp(1.6rem, 6vw, 2.2rem);
             }
 
+            /* All focus items remain uniform in single column */
             .focus-grid {
                 grid-template-columns: 1fr;
-            }
-
-            /* Reset orphan centering for single-column */
-            .focus-item:last-child:nth-child(odd) {
-                max-width: 100%;
-                grid-column: auto;
             }
 
             .stat-overlay {
@@ -1491,6 +1481,142 @@
             /* Footer logo sizing for small screens */
             .footer-logo img {
                 height: 60px !important;
+            }
+
+            /* Intro text adjustments */
+            .intro-content p.highlight {
+                font-size: 1.2rem;
+            }
+
+            .intro-content p {
+                font-size: 0.95rem;
+            }
+
+            /* Pillar cards */
+            .pillar {
+                padding: 1.5rem;
+            }
+
+            .pillar h3 {
+                font-size: 1.5rem;
+            }
+
+            /* Approach footer */
+            .approach-footer p {
+                font-size: 1.1rem;
+            }
+
+            /* Partner cards */
+            .partner-card {
+                padding: 1.5rem;
+            }
+
+            .partner-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .partner-card p {
+                font-size: 0.9rem;
+            }
+
+            /* Performance text */
+            .performance-text {
+                font-size: 0.95rem;
+            }
+
+            .performance-footer {
+                font-size: 1.1rem;
+            }
+
+            .performance-highlight {
+                padding: 1.5rem;
+            }
+
+            /* Philosophy text */
+            .philosophy-text {
+                font-size: 1rem;
+            }
+
+            /* CTA */
+            .cta {
+                padding: 4rem 1.2rem;
+            }
+
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+
+            /* Hero line shorter on small screens */
+            .hero-line {
+                height: 50px;
+            }
+
+            .hero-tagline {
+                font-size: 0.65rem;
+                letter-spacing: 0.2em;
+            }
+        }
+
+        /* Extra small screens (320px) */
+        @media (max-width: 360px) {
+            section {
+                padding: 2.5rem 1rem;
+            }
+
+            .hero {
+                padding: 4.5rem 1rem 2.5rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.8rem, 10vw, 2.4rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .hero-cta-group {
+                max-width: 260px;
+            }
+
+            .logo img {
+                height: 55px;
+            }
+
+            .section-title {
+                font-size: clamp(1.4rem, 6vw, 1.8rem);
+            }
+
+            .focus-item h4 {
+                font-size: 1rem;
+            }
+
+            .approach-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .approach-item p {
+                font-size: 0.85rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+
+            .footer-links a {
+                font-size: 0.75rem;
+            }
+
+            .footer-copyright {
+                font-size: 0.7rem;
+            }
+
+            .footer-logo img {
+                height: 50px !important;
+            }
+
+            .cta-buttons {
+                max-width: 260px;
             }
         }
     </style>
