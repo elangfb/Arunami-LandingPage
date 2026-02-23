@@ -40,6 +40,12 @@
 
         html {
             scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
         }
 
         body {
@@ -1274,6 +1280,7 @@
                 align-items: center;
                 width: 100%;
                 max-width: 300px;
+                margin: 0 auto;
             }
 
             .hero-cta-group .btn-primary,
