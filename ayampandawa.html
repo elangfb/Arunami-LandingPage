@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ayam Goreng Pandawa — Investor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --brown-deep: #130C04;
+  --brown-mid: #1E1108;
+  --brown-warm: #2C1A0E;
+  --cream: #F5EDD8;
+  --cream-dim: #C8B99A;
+  --white: #FDFAF4;
+  --orange: #D4631A;
+  --muted: #7A6A58;
+}
+
+body {
+  background: var(--brown-deep);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── STICKY NAV ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(19,12,4,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.nav-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  padding: 100px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 10% 40%, rgba(201,168,76,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(212,99,26,0.09) 0%, transparent 50%),
+    var(--brown-deep);
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeUp .7s ease forwards .1s;
+}
+
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  line-height: .92;
+  color: var(--white);
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeUp .7s ease forwards .25s;
+}
+.hero-h1 em { font-style: italic; color: var(--gold); }
+
+.hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--cream-dim);
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp .7s ease forwards .4s;
+}
+
+.hero-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.1);
+  opacity: 0;
+  animation: fadeUp .7s ease forwards .55s;
+}
+.kpi-cell {
+  background: var(--brown-mid);
+  padding: 18px 16px;
+  text-align: center;
+}
+.kpi-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+}
+.kpi-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+  display: block;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeUp .7s ease forwards .9s;
+}
+.scroll-cue-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(var(--gold), transparent);
+  animation: pulse 2s ease infinite;
+}
+
+/* ── SECTION BASE ── */
+.sec {
+  padding: 64px 24px;
+}
+.sec-alt { background: var(--brown-mid); }
+
+.sec-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.sec-title em { font-style: italic; color: var(--gold); }
+.sec-body {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--cream-dim);
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 0;
+}
+
+/* ── MARKET PILLS ── */
+.market-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.market-pill {
+  background: var(--brown-warm);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.market-pill-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 80px;
+}
+.market-pill-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--cream-dim);
+}
+
+/* ── OPPORTUNITY CARDS ── */
+.opp-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.opp-card {
+  background: var(--brown-deep);
+  border: 1px solid rgba(201,168,76,0.08);
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.opp-card-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: rgba(201,168,76,0.08);
+  line-height: 1;
+  position: absolute;
+  top: 10px; right: 16px;
+}
+.opp-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.opp-card-body {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  position: relative;
+}
+
+/* ── METRICS GRID ── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(201,168,76,0.08);
+  margin-top: 28px;
+}
+.metric-card {
+  background: var(--brown-deep);
+  padding: 24px 16px;
+  text-align: center;
+}
+.metric-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.metric-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--orange);
+  display: block;
+  margin-bottom: 6px;
+}
+.metric-desc {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── CONCEPT CARDS ── */
+.concept-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.concept-card {
+  background: var(--brown-deep);
+  padding: 24px 20px;
+  border-left: 3px solid var(--gold);
+}
+.concept-card:nth-child(2) { border-left-color: var(--orange); }
+.concept-card:nth-child(3) { border-left-color: #8BC34A; }
+.concept-emoji { font-size: 28px; display: block; margin-bottom: 12px; }
+.concept-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.concept-body { font-size: 13px; line-height: 1.65; color: var(--cream-dim); }
+.concept-tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 3px 8px;
+}
+
+/* ── USP LIST ── */
+.usp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.usp-item {
+  background: var(--brown-deep);
+  border: 1px solid rgba(201,168,76,0.06);
+  padding: 22px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.usp-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 36px;
+}
+.usp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.usp-body { font-size: 13px; line-height: 1.65; color: var(--cream-dim); }
+
+/* ── ROI BANNER ── */
+.roi-banner {
+  background: var(--gold);
+  padding: 52px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.roi-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(19,12,4,0.04) 20px,
+    rgba(19,12,4,0.04) 21px
+  );
+}
+.roi-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 96px;
+  font-weight: 900;
+  color: var(--brown-deep);
+  line-height: .9;
+  display: block;
+  position: relative;
+}
+.roi-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--brown-warm);
+  margin-top: 12px;
+  display: block;
+  position: relative;
+}
+.roi-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+  position: relative;
+}
+.roi-sub-cell { text-align: center; }
+.roi-sub-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--brown-deep);
+  display: block;
+}
+.roi-sub-lbl {
+  font-size: 10px;
+  color: var(--brown-warm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 3px;
+  display: block;
+}
+
+/* ── FINANCIALS ── */
+.fin-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.fin-row {
+  background: var(--brown-warm);
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.fin-row-label { font-size: 13px; color: var(--cream-dim); flex: 1; }
+.fin-row-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  text-align: right;
+  flex-shrink: 0;
+}
+.fin-row-val.hi { color: var(--gold); }
+
+.sec-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 28px 0 12px;
+}
+
+.capex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.capex-row {
+  background: var(--brown-deep);
+  border: 1px solid rgba(201,168,76,0.06);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.capex-no {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  width: 18px;
+  flex-shrink: 0;
+}
+.capex-label { font-size: 13px; color: var(--cream-dim); flex: 1; }
+.capex-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  text-align: right;
+  flex-shrink: 0;
+}
+.capex-total {
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1px;
+}
+.capex-total-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+.capex-total-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--gold-light);
+}
+
+/* ── TEAM ── */
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.team-item {
+  background: var(--brown-deep);
+  border: 1px solid rgba(201,168,76,0.07);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.team-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1.5px solid rgba(201,168,76,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.team-info { flex: 1; min-width: 0; }
+.team-name { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.team-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 3px;
+}
+.team-exp { font-size: 11px; color: var(--muted); }
+
+/* ── STRATEGY ── */
+.strategy-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 28px;
+}
+.strategy-card {
+  background: var(--brown-deep);
+  padding: 22px 20px;
+  border-top: 2px solid var(--gold);
+}
+.strategy-card:nth-child(2) { border-top-color: var(--orange); }
+.strategy-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.strategy-body { font-size: 13px; line-height: 1.65; color: var(--cream-dim); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 3px 8px;
+}
+
+/* ── CLOSING ── */
+.closing {
+  padding: 72px 24px 56px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    var(--brown-deep);
+  border-top: 1px solid rgba(201,168,76,0.12);
+}
+.closing-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.closing-quote em { color: var(--gold); }
+.closing-brand {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 36px;
+  display: block;
+}
+.cta-btn {
+  display: block;
+  background: var(--gold);
+  color: var(--brown-deep);
+  text-align: center;
+  padding: 18px 32px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .25s;
+}
+.cta-btn:active { background: var(--gold-light); }
+
+.footer {
+  background: #0A0602;
+  padding: 20px 24px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  line-height: 1.7;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%,100% { opacity: .3; }
+  50% { opacity: 1; }
+}
+
+/* Scroll-triggered fade-in */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">PANDAWA</div>
+  <div class="nav-pill">Q3 2025 · 7PR</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-eyebrow">Business Proposal · Investor</div>
+  <h1 class="hero-h1">Ayam Goreng<br><em>Pandawa</em></h1>
+  <p class="hero-tagline">Indonesia's Most Consumed Dish.<br>Systematized for Scale.</p>
+  <div class="hero-kpi-grid">
+    <div class="kpi-cell">
+      <span class="kpi-val">Rp 1.7M</span>
+      <span class="kpi-lbl">Total CAPEX</span>
+    </div>
+    <div class="kpi-cell">
+      <span class="kpi-val">43%</span>
+      <span class="kpi-lbl">ROI / Tahun</span>
+    </div>
+    <div class="kpi-cell">
+      <span class="kpi-val">12 Bln</span>
+      <span class="kpi-lbl">Payback Period</span>
+    </div>
+    <div class="kpi-cell">
+      <span class="kpi-val">60 Bln</span>
+      <span class="kpi-lbl">Kontrak Investor</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-cue-text">Scroll</div>
+    <div class="scroll-cue-line"></div>
+  </div>
+</div>
+
+<!-- OPPORTUNITY -->
+<div class="gold-rule"></div>
+<section class="sec reveal">
+  <div class="sec-label">01 · The Opportunity</div>
+  <h2 class="sec-title">Pasar Terbesar<br>di <em>Negeri Sendiri</em></h2>
+  <p class="sec-body">Ayam goreng adalah makanan paling dikonsumsi di Indonesia. Setiap daerah punya versi dan kebanggaannya sendiri — menjadikannya bisnis yang highly replicable namun belum ada pemimpin nasional yang sesungguhnya.</p>
+
+  <div class="market-pills">
+    <div class="market-pill">
+      <div class="market-pill-num">#1</div>
+      <p class="market-pill-desc">Jawa Barat sebagai pasar ayam goreng terbesar di Indonesia — supply & demand tertinggi nasional</p>
+    </div>
+    <div class="market-pill">
+      <div class="market-pill-num">16%</div>
+      <p class="market-pill-desc">Pangsa permintaan ayam goreng nasional dikuasai Jawa Barat — pusat strategis untuk ekspansi</p>
+    </div>
+    <div class="market-pill">
+      <div class="market-pill-num">2M+</div>
+      <p class="market-pill-desc">Views TikTok "Ayam Goreng Bogor" — demand viral jauh melampaui angka search keyword</p>
+    </div>
+  </div>
+
+  <div class="opp-cards">
+    <div class="opp-card">
+      <div class="opp-card-num">01</div>
+      <div class="opp-card-title">Cultural Pull</div>
+      <p class="opp-card-body">Hadir di setiap momen harian, perayaan, bahkan diet. Demand tidak musiman — ini adalah kebutuhan budaya.</p>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">02</div>
+      <div class="opp-card-title">Fragmentasi Pasar</div>
+      <p class="opp-card-body">Multi-chain kehilangan otentisitas, hyper-local sulit scale. Pandawa hadir di sweet spot keduanya.</p>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">03</div>
+      <div class="opp-card-title">Bogor sebagai Launchpad</div>
+      <p class="opp-card-body">Search "Ayam Goreng Bogor" dengan CPC Rp 0 — peluang organik SEO & Google Maps yang belum dioptimalkan siapapun.</p>
+    </div>
+    <div class="opp-card">
+      <div class="opp-card-num">04</div>
+      <div class="opp-card-title">Proven Operator</div>
+      <p class="opp-card-body">Tim 7PR sudah membuktikan model serupa lewat B7P: revenue Rp 1B+/bulan dalam under 2 bulan sejak buka.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK RECORD -->
+<div class="gold-rule"></div>
+<section class="sec sec-alt reveal">
+  <div class="sec-label">02 · Rekam Jejak Tim</div>
+  <h2 class="sec-title">Bukan <em>Pemula</em></h2>
+  <p class="sec-body">Sebelum Pandawa, tim 7PR membangun Bakso Tujuh Pemuda (B7P) dari nol. Hasilnya berbicara sendiri.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <span class="metric-val">~1.5B</span>
+      <span class="metric-sub">&lt; 2 Bulan</span>
+      <p class="metric-desc">CAPEX diamankan dalam waktu sangat singkat</p>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">~1B</span>
+      <span class="metric-sub">Over-Achieved</span>
+      <p class="metric-desc">Monthly GMV, tumbuh 15% MoM</p>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">>15K</span>
+      <span class="metric-sub">Per Bulan</span>
+      <p class="metric-desc">Unique visitors/bulan dari berbagai channel</p>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">4.7★</span>
+      <span class="metric-sub">>1,000 Review</span>
+      <p class="metric-desc">Google Review konsisten dari makanan hingga kebersihan</p>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">>10M</span>
+      <span class="metric-sub">Impression</span>
+      <p class="metric-desc">KOL besar + liputan TV nasional + UGC viral</p>
+    </div>
+    <div class="metric-card">
+      <span class="metric-val">>3K</span>
+      <span class="metric-sub">Followers</span>
+      <p class="metric-desc">Instagram & TikTok tumbuh cepat secara organik</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE CONCEPT -->
+<div class="gold-rule"></div>
+<section class="sec reveal">
+  <div class="sec-label">03 · The Concept</div>
+  <h2 class="sec-title">Satu Brand,<br><em>Tiga Kekuatan</em></h2>
+  <p class="sec-body">Pandawa memadukan kekuatan tiga model bisnis ayam goreng terbesar di Indonesia menjadi satu konsep yang scalable secara nasional.</p>
+
+  <div class="concept-cards">
+    <div class="concept-card">
+      <span class="concept-emoji">🏢</span>
+      <div class="concept-title">Multi-Chain Legend</div>
+      <p class="concept-body">Sistem operasional solid, konsistensi produk terjaga, replikasi antar kota mudah.</p>
+      <span class="concept-tag">Scalability: High</span>
+    </div>
+    <div class="concept-card">
+      <span class="concept-emoji">🌶️</span>
+      <div class="concept-title">Hyper-Local Legend</div>
+      <p class="concept-body">Identitas rasa yang kuat, koneksi emosional lokal, otentisitas produk tidak tertandingi.</p>
+      <span class="concept-tag">Authenticity: Solid</span>
+    </div>
+    <div class="concept-card">
+      <span class="concept-emoji">✨</span>
+      <div class="concept-title">Modern Timeless</div>
+      <p class="concept-body">Brand relevan lintas generasi, konten visual kuat. Menjangkau audiens modern sambil menjaga nilai otentik.</p>
+      <span class="concept-tag">Brand: Timeless</span>
+    </div>
+  </div>
+</section>
+
+<!-- USPs -->
+<div class="gold-rule"></div>
+<section class="sec sec-alt reveal">
+  <div class="sec-label">04 · Keunggulan</div>
+  <h2 class="sec-title">5 Alasan<br><em>untuk Menang</em></h2>
+
+  <div class="usp-list">
+    <div class="usp-item">
+      <div class="usp-num">1</div>
+      <div>
+        <div class="usp-title">Authentic Products</div>
+        <p class="usp-body">Spesialisasi Bumbu Kering & Ayam Manis dengan sambal signature eksklusif yang tidak bisa ditiru kompetitor.</p>
+      </div>
+    </div>
+    <div class="usp-item">
+      <div class="usp-num">2</div>
+      <div>
+        <div class="usp-title">Operational Excellence</div>
+        <p class="usp-body">SLA ~5–10 menit/order, kalibrasi kualitas setiap 10 menit, pelatihan rutin. Konsistensi bukan kebetulan.</p>
+      </div>
+    </div>
+    <div class="usp-item">
+      <div class="usp-num">3</div>
+      <div>
+        <div class="usp-title">Dynamic Brand</div>
+        <p class="usp-body">Modern, approachable, relevan lintas segmen usia. Storytelling yang membangun loyalitas, bukan sekadar promosi.</p>
+      </div>
+    </div>
+    <div class="usp-item">
+      <div class="usp-num">4</div>
+      <div>
+        <div class="usp-title">Data-Driven</div>
+        <p class="usp-body">Pemilihan lokasi, strategi harga, hingga KOL selection — semua berbasis data, bukan feeling.</p>
+      </div>
+    </div>
+    <div class="usp-item">
+      <div class="usp-num">5</div>
+      <div>
+        <div class="usp-title">Muslim Values</div>
+        <p class="usp-body">Operasi berbasis prinsip Islam — meminimalkan fraud, menjunjung integritas, fondasi bisnis yang tahan lama.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI BANNER -->
+<div class="roi-banner reveal">
+  <span class="roi-big">43%</span>
+  <span class="roi-tag">Return on Investment · Per Tahun</span>
+  <div class="roi-sub-grid">
+    <div class="roi-sub-cell">
+      <span class="roi-sub-val">Rp 137.6M</span>
+      <span class="roi-sub-lbl">Bagi Hasil Investor/Bln</span>
+    </div>
+    <div class="roi-sub-cell">
+      <span class="roi-sub-val">12 Bulan</span>
+      <span class="roi-sub-lbl">Payback Period</span>
+    </div>
+    <div class="roi-sub-cell">
+      <span class="roi-sub-val">60 Bulan</span>
+      <span class="roi-sub-lbl">Periode Kontrak</span>
+    </div>
+    <div class="roi-sub-cell">
+      <span class="roi-sub-val">Rp 78.6M</span>
+      <span class="roi-sub-lbl">Profit After BEP</span>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIALS -->
+<div class="gold-rule"></div>
+<section class="sec reveal">
+  <div class="sec-label">05 · Proyeksi Keuangan</div>
+  <h2 class="sec-title">Angka yang <em>Bicara</em></h2>
+  <p class="sec-body">Harga jual Rp 25–50k per item, kapasitas 200 kursi, target 216 transaksi/hari pada skenario progresif.</p>
+
+  <div class="sec-subtitle">Revenue & Profitabilitas</div>
+  <div class="fin-rows">
+    <div class="fin-row">
+      <span class="fin-row-label">Est. Sales/Bulan (Progresif)</span>
+      <span class="fin-row-val hi">Rp 950 Jt</span>
+    </div>
+    <div class="fin-row">
+      <span class="fin-row-label">Est. Sales/Bulan (Moderate)</span>
+      <span class="fin-row-val">Rp 675 Jt</span>
+    </div>
+    <div class="fin-row">
+      <span class="fin-row-label">Net Profit Before BEP</span>
+      <span class="fin-row-val hi">Rp 196.6 Jt</span>
+    </div>
+    <div class="fin-row">
+      <span class="fin-row-label">Bagi Hasil Investor (70%)</span>
+      <span class="fin-row-val">Rp 137.6 Jt</span>
+    </div>
+    <div class="fin-row">
+      <span class="fin-row-label">Profit After BEP (Investor 40%)</span>
+      <span class="fin-row-val hi">Rp 78.6 Jt</span>
+    </div>
+    <div class="fin-row">
+      <span class="fin-row-label">Total Investasi</span>
+      <span class="fin-row-val hi">Rp 1.7 M</span>
+    </div>
+  </div>
+
+  <div class="sec-subtitle">Detail CAPEX</div>
+  <div class="capex-list">
+    <div class="capex-row">
+      <span class="capex-no">1</span>
+      <span class="capex-label">Design, Construction & Build</span>
+      <span class="capex-amount">Rp 960 Jt</span>
+    </div>
+    <div class="capex-row">
+      <span class="capex-no">2</span>
+      <span class="capex-label">Rent Cost (1 tahun)</span>
+      <span class="capex-amount">Rp 335 Jt</span>
+    </div>
+    <div class="capex-row">
+      <span class="capex-no">3</span>
+      <span class="capex-label">First Operation & Raw Materials</span>
+      <span class="capex-amount">Rp 75 Jt</span>
+    </div>
+    <div class="capex-row">
+      <span class="capex-no">4</span>
+      <span class="capex-label">Equipment & Furniture</span>
+      <span class="capex-amount">Rp 245 Jt</span>
+    </div>
+    <div class="capex-row">
+      <span class="capex-no">5</span>
+      <span class="capex-label">Marketing Booster</span>
+      <span class="capex-amount">Rp 50 Jt</span>
+    </div>
+    <div class="capex-row">
+      <span class="capex-no">6</span>
+      <span class="capex-label">Permit</span>
+      <span class="capex-amount">Rp 35 Jt</span>
+    </div>
+  </div>
+  <div class="capex-total">
+    <span class="capex-total-label">Total CAPEX</span>
+    <span class="capex-total-val">Rp 1,700,000,000</span>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<div class="gold-rule"></div>
+<section class="sec sec-alt reveal">
+  <div class="sec-label">06 · Go-To-Market</div>
+  <h2 class="sec-title">Strategi <em>Dominasi</em><br>Bogor</h2>
+  <p class="sec-body">Tujuan utama: menjadi Top of Mind Restoran Ayam Goreng di Bogor, kemudian ekspansi nasional.</p>
+
+  <div class="strategy-cards">
+    <div class="strategy-card">
+      <div class="strategy-head">📣 Marketing Strategy</div>
+      <p class="strategy-body">Emotion-led marketing + data-driven operations. Leveraged 50+ konten KOL & UGC, 5+ community events, kolaborasi digital media, hingga program TV nasional.</p>
+      <div class="tag-row">
+        <span class="tag">KOL & UGC</span>
+        <span class="tag">Community</span>
+        <span class="tag">FOMO Effect</span>
+      </div>
+    </div>
+    <div class="strategy-card">
+      <div class="strategy-head">⚙️ Operational Strategy</div>
+      <p class="strategy-body">SLA ~5–10 menit, kalibrasi produk setiap 10 menit, pelatihan tone-of-voice rutin. Konsistensi rasa dan pengalaman adalah senjata utama.</p>
+      <div class="tag-row">
+        <span class="tag">SLA Ketat</span>
+        <span class="tag">Quality First</span>
+        <span class="tag">Word of Mouth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<div class="gold-rule"></div>
+<section class="sec reveal">
+  <div class="sec-label">07 · The Maestros</div>
+  <h2 class="sec-title">Tim yang<br><em>Sudah Terbukti</em></h2>
+  <p class="sec-body">Sinergi marketing & F&B expert dari ekosistem startup dan korporasi terkemuka Indonesia.</p>
+
+  <div class="team-list">
+    <div class="team-item">
+      <div class="team-avatar">E</div>
+      <div class="team-info">
+        <div class="team-name">Edwin Widya Perdana</div>
+        <span class="team-role">Expansion Expert</span>
+        <span class="team-exp">Es-teh Nusantara · Kopi Kenangan</span>
+      </div>
+    </div>
+    <div class="team-item">
+      <div class="team-avatar">E</div>
+      <div class="team-info">
+        <div class="team-name">Emeraldo Faris Aufar</div>
+        <span class="team-role">Growth Expert</span>
+        <span class="team-exp">M Hubster · GoTo</span>
+      </div>
+    </div>
+    <div class="team-item">
+      <div class="team-avatar">A</div>
+      <div class="team-info">
+        <div class="team-name">Achmad Ja'far Al Fakhry</div>
+        <span class="team-role">Brand Expert</span>
+        <span class="team-exp">Bakso Boedjangan · GoTo</span>
+      </div>
+    </div>
+    <div class="team-item">
+      <div class="team-avatar">D</div>
+      <div class="team-info">
+        <div class="team-name">Dea Widya Firmansyah</div>
+        <span class="team-role">Operation Expert</span>
+        <span class="team-exp">Ruanmitra · GoTo</span>
+      </div>
+    </div>
+    <div class="team-item">
+      <div class="team-avatar">R</div>
+      <div class="team-info">
+        <div class="team-name">Rahadika Widya Nugraha</div>
+        <span class="team-role">Strategic Expert</span>
+        <span class="team-exp">Pertamina · GoTo</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing reveal">
+  <p class="closing-quote">"This may not be the first ayam goreng restaurant in Bogor, but we are confident it will be the <em>first to expand nationwide</em> and bring pride to Kota Bogor."</p>
+  <span class="closing-brand">PT Tujuh Pendekar Rasa · 7PR · Q3 2025</span>
+  <a href="mailto:investor@7pr.id" class="cta-btn">Connect With Us</a>
+</div>
+
+<div class="footer">
+  Strictly Confidential · Copyright © 2025 PT Marka Digital Indonesia<br>
+  Prepared by Business Department® · PT Tujuh Pendekar Rasa [7PR]
+</div>
+
+<script>
+  // Scroll reveal
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
