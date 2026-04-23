@@ -78,7 +78,7 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
+            z-index: 160;
             padding: 2rem 4rem;
             display: flex;
             justify-content: space-between;
@@ -212,6 +212,88 @@
         .nav-links a:hover {
             opacity: 1;
             color: var(--color-accent-light);
+        }
+
+        /* Ecology Dropdown */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .nav-dropdown-toggle .chevron {
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-toggle .chevron {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            left: 50%;
+            transform: translateX(-50%);
+            list-style: none;
+            min-width: 160px;
+            padding: 0.5rem 0;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .nav-dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.75rem;
+        }
+
+        nav.hero-nav .dropdown-menu {
+            background: var(--color-bg-dark);
+            border-color: var(--color-border-light);
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 0.6rem 1.5rem;
+            color: var(--color-text) !important;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu li a:hover {
+            opacity: 1;
+            color: var(--color-accent-light) !important;
+            background: var(--color-accent-soft);
+        }
+
+        nav.hero-nav .dropdown-menu li a {
+            color: var(--color-text-light) !important;
+        }
+
+        nav.hero-nav .dropdown-menu li a:hover {
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .nav-cta {
@@ -1108,6 +1190,11 @@
             color: var(--color-text-muted);
         }
 
+        /* Hide empty stat overlay */
+        .stat-overlay:empty {
+            display: none;
+        }
+
         /* Animations on Scroll */
         .reveal {
             opacity: 0;
@@ -1194,6 +1281,7 @@
                 transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 150;
                 box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                overflow-y: auto;
             }
 
             .nav-menu.open {
@@ -1241,6 +1329,51 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+            }
+
+            /* Mobile dropdown */
+            .nav-dropdown {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-dropdown-toggle {
+                justify-content: center;
+            }
+
+            .dropdown-menu {
+                position: static;
+                transform: none;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                padding: 0;
+                min-width: unset;
+                display: none;
+            }
+
+            .nav-dropdown.open .dropdown-menu {
+                display: block;
+            }
+
+            .nav-dropdown.open .nav-dropdown-toggle .chevron {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-menu li a {
+                color: var(--color-text-light) !important;
+                font-size: 0.95rem;
+                padding: 0.4rem 1rem;
+                opacity: 0.7;
+            }
+
+            .dropdown-menu li a:hover {
+                background: transparent;
+                opacity: 1;
+                color: var(--color-accent-light) !important;
             }
 
             /* Spacing */
@@ -1308,10 +1441,14 @@
                 padding: 1.5rem;
             }
 
-            /* Focus grid — all items uniform, no special orphan treatment */
+            /* Focus grid — 2 columns, last item spans both to avoid orphan */
             .focus-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
+            }
+
+            .focus-item:last-child {
+                grid-column: 1 / -1;
             }
 
             .focus-item {
@@ -1638,7 +1775,19 @@
                 <li><a href="#focus">Focus</a></li>
                 <li><a href="#approach">Approach</a></li>
                 <li><a href="#partners">Partners</a></li>
-                <li><a href="pranaventure.html">Prana</a></li>
+                <li class="nav-dropdown">
+                    <a href="javascript:void(0)" class="nav-dropdown-toggle">
+                        Ecology
+                        <svg class="chevron" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" width="10" height="6">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ekosistem.html">Ecosystem</a></li>
+                        <li><a href="pranaventure.html">Prana</a></li>
+                        <li><a href="bija.html">Bija</a></li>
+                    </ul>
+                </li>
             </ul>
             <a href="form.html" class="nav-cta">Get In Touch</a>
         </div>
@@ -1956,6 +2105,7 @@
             navMenu.classList.remove('open');
             navOverlay.classList.remove('open');
             document.body.style.overflow = '';
+            navMenu.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
         }
 
         navToggle.addEventListener('click', () => {
@@ -1968,8 +2118,18 @@
 
         navOverlay.addEventListener('click', closeMenu);
 
-        // Close menu when nav link clicked
-        navMenu.querySelectorAll('.nav-links a').forEach(link => {
+        // Mobile dropdown toggle
+        navMenu.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            dropdown.querySelector('.nav-dropdown-toggle').addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('open');
+                }
+            });
+        });
+
+        // Close menu when nav link clicked (excluding dropdown toggles)
+        navMenu.querySelectorAll('.nav-links a:not(.nav-dropdown-toggle)').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 

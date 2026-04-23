@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bija — Where Everything Begins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:         #f4efe6;
+    --bg-deeper:  #ebe3d5;
+    --ink:        #1b2a22;
+    --ink-soft:   #2d3d33;
+    --muted:      #5a6a5f;
+    --moss:       #4a6b4d;
+    --moss-deep:  #2f4a34;
+    --clay:       #b3693f;
+    --clay-soft:  #c98a5f;
+    --gold:       #9a7a3a;
+    --line:       rgba(27,42,34,0.14);
+    --line-soft:  rgba(27,42,34,0.08);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',-apple-system,sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:100;
+    opacity:0.35;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  body::after{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(179,105,63,0.10), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(74,107,77,0.12), transparent 60%);
+  }
+
+  .wrap{
+    position:relative;z-index:1;
+    max-width:1240px;margin:0 auto;
+    padding:48px clamp(24px, 5vw, 72px) 80px;
+  }
+
+  /* NAV */
+  nav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:60px;border-bottom:1px solid var(--line);
+    margin-bottom:72px;
+  }
+  .brandmark{
+    display:flex;align-items:center;gap:14px;
+    font-family:'Fraunces',serif;font-weight:400;font-size:22px;
+    letter-spacing:0.04em;
+  }
+  .brandmark svg{width:30px;height:30px;color:var(--moss-deep)}
+  .brandmark span em{font-style:italic;color:var(--clay);font-weight:300}
+  .meta{
+    font-size:12px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;
+  }
+
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1fr 1fr;gap:80px;
+    align-items:start;margin-bottom:120px;
+  }
+  @media(max-width:900px){.hero{grid-template-columns:1fr;gap:48px}}
+
+  .hero-left .tag{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:11px;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--moss);margin-bottom:36px;font-weight:600;
+  }
+  .tag .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--clay);
+    box-shadow:0 0 0 3px rgba(179,105,63,0.2);
+  }
+
+  .sanskrit{
+    display:none;
+  }
+
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(52px, 7vw, 96px);line-height:0.98;
+    letter-spacing:-0.02em;color:var(--ink);margin-bottom:32px;
+  }
+  h1 em{font-style:italic;font-weight:300;color:var(--moss)}
+  h1 .seed{
+    display:inline-block;color:var(--clay);
+    font-style:normal;transform:translateY(-6px);
+  }
+
+  .lede{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:22px;line-height:1.5;
+    color:var(--ink-soft);max-width:520px;
+  }
+
+  .hero-right{position:relative;padding-top:20px}
+  .hero-quote{
+    border-left:2px solid var(--clay);
+    padding:4px 0 4px 28px;
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:20px;line-height:1.55;
+    color:var(--ink-soft);margin-bottom:40px;
+  }
+
+  .hero-illus{
+    width:100%;max-width:340px;margin-left:auto;
+    display:block;color:var(--moss-deep);opacity:0.9;
+  }
+
+  /* FAMILY STRIP */
+  .family{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+    background:var(--line);border:1px solid var(--line);
+    margin-bottom:120px;
+  }
+  @media(max-width:760px){.family{grid-template-columns:1fr}}
+  .family-cell{
+    background:var(--bg);padding:36px 32px;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .family-cell.active{background:var(--moss-deep);color:var(--bg)}
+  .family-cell .role{
+    font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+    font-weight:600;opacity:0.7;
+  }
+  .family-cell h4{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:32px;letter-spacing:-0.01em;
+  }
+  .family-cell h4 em{font-style:italic;opacity:0.85}
+  .family-cell p{font-size:14px;line-height:1.5;opacity:0.8}
+  .family-cell.active p{opacity:0.75}
+
+  /* SECTIONS */
+  .section{margin-bottom:120px}
+  .section-lbl{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;margin-bottom:20px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .section-lbl::before{
+    content:"";width:36px;height:1px;background:var(--clay);
+  }
+  h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(36px, 4.5vw, 56px);line-height:1.05;
+    letter-spacing:-0.015em;color:var(--ink);
+    margin-bottom:48px;max-width:820px;
+  }
+  h2 em{font-style:italic;color:var(--moss)}
+
+  /* CRITERIA */
+  .criteria{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  @media(max-width:760px){.criteria{grid-template-columns:1fr}}
+  .crit{background:var(--bg);padding:44px 40px;position:relative}
+  .crit-num{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:14px;color:var(--clay);margin-bottom:20px;letter-spacing:0.08em;
+  }
+  .crit h3{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:24px;margin-bottom:14px;color:var(--ink);letter-spacing:-0.01em;
+  }
+  .crit h3 em{font-style:italic;color:var(--moss-deep)}
+  .crit p{font-size:15px;line-height:1.65;color:var(--ink-soft)}
+
+  /* FIT */
+  .fit{
+    background:var(--moss-deep);color:var(--bg);
+    padding:64px clamp(32px, 5vw, 72px);
+    display:grid;grid-template-columns:1fr 2fr;gap:60px;
+    align-items:start;position:relative;overflow:hidden;
+  }
+  @media(max-width:820px){.fit{grid-template-columns:1fr;gap:32px}}
+  .fit::before{
+    content:"";position:absolute;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+  .fit > *{position:relative;z-index:1}
+  .fit h3{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(28px,3.5vw,40px);line-height:1.1;letter-spacing:-0.01em;
+  }
+  .fit h3 em{font-style:italic;color:var(--clay-soft)}
+  .fit-list{display:grid;gap:24px}
+  .fit-item{
+    display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:baseline;
+  }
+  .fit-item .k{
+    font-family:'Fraunces',serif;font-style:italic;
+    font-size:15px;color:var(--clay-soft);min-width:80px;
+    font-weight:300;letter-spacing:0.04em;
+  }
+  .fit-item .v{
+    font-size:16px;line-height:1.55;color:rgba(244,239,230,0.88);
+  }
+
+  /* OFFER */
+  .offer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  @media(max-width:900px){.offer-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.offer-grid{grid-template-columns:1fr}}
+  .offer{padding-top:28px;border-top:1px solid var(--line)}
+  .offer-icon{width:32px;height:32px;color:var(--moss-deep);margin-bottom:20px}
+  .offer h4{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:20px;margin-bottom:10px;letter-spacing:-0.005em;
+  }
+  .offer h4 em{font-style:italic;color:var(--clay)}
+  .offer p{font-size:14px;line-height:1.6;color:var(--muted)}
+
+  /* MANIFESTO */
+  .manifesto{
+    text-align:center;padding:80px 0 40px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    margin-bottom:100px;position:relative;
+  }
+  .manifesto svg.ornament{
+    display:block;margin:0 auto 32px;width:48px;color:var(--clay);
+  }
+  .manifesto blockquote{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(24px, 3vw, 34px);line-height:1.35;color:var(--ink);
+    max-width:780px;margin:0 auto 32px;letter-spacing:-0.005em;
+  }
+  .manifesto blockquote em{
+    font-style:normal;color:var(--moss-deep);font-weight:400;
+  }
+  .manifesto .attrib{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+
+  /* CTA */
+  .cta{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:60px;
+    align-items:center;margin-bottom:80px;
+  }
+  @media(max-width:820px){.cta{grid-template-columns:1fr;gap:32px}}
+  .cta h2{margin-bottom:20px}
+  .cta p.sub{
+    font-size:17px;line-height:1.6;color:var(--ink-soft);
+    max-width:520px;margin-bottom:36px;
+  }
+  .cta-actions{display:flex;gap:16px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 28px;font-family:'Manrope',sans-serif;
+    font-size:13px;font-weight:600;letter-spacing:0.14em;
+    text-transform:uppercase;text-decoration:none;
+    border:1px solid var(--ink);background:var(--ink);color:var(--bg);
+    transition:all 0.3s ease;cursor:pointer;
+  }
+  .btn:hover{background:var(--moss-deep);border-color:var(--moss-deep);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn svg{width:14px;height:14px}
+
+  .cta-right{border-left:1px solid var(--line);padding:24px 0 24px 48px}
+  @media(max-width:820px){.cta-right{border-left:none;border-top:1px solid var(--line);padding:32px 0 0}}
+  .cta-right .lbl{
+    font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;margin-bottom:16px;
+  }
+  .cta-right h4{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:22px;margin-bottom:10px;color:var(--ink);
+  }
+  .cta-right p{font-size:14px;color:var(--muted);line-height:1.6}
+
+  /* FOOTER */
+  footer{
+    padding-top:48px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:baseline;
+    flex-wrap:wrap;gap:16px;
+    font-size:12px;color:var(--muted);letter-spacing:0.04em;
+  }
+  footer .fm{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+    font-size:14px;color:var(--ink-soft);
+  }
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .wrap > *{animation:rise 0.9s ease both}
+  .wrap > nav{animation-delay:0s}
+  .wrap > .hero{animation-delay:0.15s}
+  .wrap > .family{animation-delay:0.3s}
+  .wrap > .section{animation-delay:0.45s}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- NAV -->
+    <nav>
+      <div class="brandmark">
+        <!-- Seed mark: circle with inner germ -->
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.4" fill="none"/>
+          <path d="M16 10 C 13 13, 13 19, 16 22 C 19 19, 19 13, 16 10 Z" fill="currentColor"/>
+          <circle cx="16" cy="16" r="1.6" fill="#b3693f"/>
+        </svg>
+        <span>Bija</span>
+      </div>
+      <div class="meta">Early-Stage Venture Studio</div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="tag"><span class="dot"></span>A Seed from Arunami</div>
+        <h1>
+          Where <em>everything</em><br>
+          begins. <span class="seed">◉</span>
+        </h1>
+        <p class="lede">
+          Bija is an early-stage venture studio partnering with founders at the most primordial moment of the journey—when the entire forest exists only as potential, held within a single seed.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-quote">
+          Within every seed is the blueprint of the tree it will become. We invest in the blueprint—and stay to tend the soil.
+        </div>
+
+        <!-- Seed illustration -->
+        <svg class="hero-illus" viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- ground line -->
+          <path d="M20 200 L340 200" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+          <!-- soil dots -->
+          <circle cx="70" cy="208" r="1" fill="currentColor" opacity="0.4"/>
+          <circle cx="120" cy="212" r="1" fill="currentColor" opacity="0.4"/>
+          <circle cx="240" cy="210" r="1" fill="currentColor" opacity="0.4"/>
+          <circle cx="295" cy="206" r="1" fill="currentColor" opacity="0.4"/>
+
+          <!-- outer concentric rings (aura of potential) -->
+          <circle cx="180" cy="120" r="78" stroke="currentColor" stroke-width="0.4" fill="none" opacity="0.25"/>
+          <circle cx="180" cy="120" r="62" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+          <!-- main seed body (almond/oval shape) -->
+          <path d="M180 70 C 158 80, 148 100, 148 120 C 148 150, 166 175, 180 180 C 194 175, 212 150, 212 120 C 212 100, 202 80, 180 70 Z" fill="currentColor" opacity="0.92"/>
+
+          <!-- inner germ/embryo line (cotyledon seam) -->
+          <path d="M180 78 C 176 100, 176 140, 180 170" stroke="#f4efe6" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+
+          <!-- embryo bud (clay accent) -->
+          <circle cx="180" cy="115" r="5" fill="#b3693f"/>
+          <circle cx="180" cy="115" r="9" stroke="#b3693f" stroke-width="0.6" fill="none" opacity="0.45"/>
+
+          <!-- tiny root tendrils at the bottom -->
+          <path d="M180 180 C 180 190, 176 196, 172 202" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M180 180 C 180 190, 184 196, 188 202" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.6"/>
+          <path d="M180 182 C 180 192, 180 198, 180 205" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+          <!-- decorative side marks -->
+          <path d="M70 195 C 70 188, 74 184, 80 185" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+          <path d="M280 195 C 280 188, 284 184, 290 185" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- BRAND FAMILY -->
+    <section class="family">
+      <div class="family-cell">
+        <div class="role">The Sky</div>
+        <h4>Prana</h4>
+        <p>Strategic canopy. The view from above—capital stewardship, long-horizon allocation, the quiet oversight that lets things grow.</p>
+      </div>
+      <div class="family-cell">
+        <div class="role">The Forest</div>
+        <h4>Arunami</h4>
+        <p>Mature ecosystems. Established ventures with roots, canopy, and mutual shade. Where seasoned operators compound over decades.</p>
+      </div>
+      <div class="family-cell active">
+        <div class="role">The Seed</div>
+        <h4>Bija</h4>
+        <p>The beginning of beginnings. Early-stage ventures under three years old, backed with capital, conviction, and hands-in-the-soil partnership.</p>
+      </div>
+    </section>
+
+    <!-- WHAT WE LOOK FOR -->
+    <section class="section">
+      <div class="section-lbl">Investment Thesis</div>
+      <h2>We plant early, <em>and we plant with care.</em></h2>
+
+      <div class="criteria">
+        <div class="crit">
+          <div class="crit-num">i.</div>
+          <h3>Ticket <em>under IDR 1B</em></h3>
+          <p>We invest at the seed stage—where the number on the cheque is smaller than the conviction behind it. Enough to buy runway, patient enough to grow into value.</p>
+        </div>
+        <div class="crit">
+          <div class="crit-num">ii.</div>
+          <h3>Companies <em>under three years</em></h3>
+          <p>We meet founders in the formative season: when the product is finding its shape, the team is finding its rhythm, and the market is still being read—carefully.</p>
+        </div>
+        <div class="crit">
+          <div class="crit-num">iii.</div>
+          <h3>Strong founders <em>& teams</em></h3>
+          <p>Not pedigree—clarity. Founders with the maturity to know that building is unromantic work, and the conviction to keep going when it is.</p>
+        </div>
+        <div class="crit">
+          <div class="crit-num">iv.</div>
+          <h3>Rooted in <em>fundamentals</em></h3>
+          <p>Ideas that are exciting, yes—but anchored in profitability, real problems, and sustainable unit economics. We don't fund growth fuelled by euphoria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIT -->
+    <section class="section">
+      <div class="section-lbl">The Fit</div>
+      <h2>We partner with founders who need <em>more than capital.</em></h2>
+
+      <div class="fit">
+        <div>
+          <h3>Capital is the seed.<br><em>Partnership is the soil.</em></h3>
+        </div>
+        <div class="fit-list">
+          <div class="fit-item">
+            <div class="k">Stage</div>
+            <div class="v">Seed — pre-revenue to early traction, under 3 years of operation.</div>
+          </div>
+          <div class="fit-item">
+            <div class="k">Ticket</div>
+            <div class="v">Up to IDR 1 billion per venture, often syndicated with aligned partners.</div>
+          </div>
+          <div class="fit-item">
+            <div class="k">Founder</div>
+            <div class="v">Committed, operationally sharp, intellectually honest. Values-driven.</div>
+          </div>
+          <div class="fit-item">
+            <div class="k">Idea</div>
+            <div class="v">Solves a real problem. Has room to grow. Survives a margin test.</div>
+          </div>
+          <div class="fit-item">
+            <div class="k">Mindset</div>
+            <div class="v">Willing to share vision, value, risk, and return. Built to endure, not to exit in haste.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFER -->
+    <section class="section">
+      <div class="section-lbl">Beyond Capital</div>
+      <h2>What we bring <em>to the table—and to the soil.</em></h2>
+
+      <div class="offer-grid">
+        <div class="offer">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4 L16 28 M4 16 L28 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.3" fill="none"/>
+          </svg>
+          <h4>Strategic <em>Clarity</em></h4>
+          <p>We sit at the table when the hard decisions arrive—pricing, positioning, org design, capital structure.</p>
+        </div>
+        <div class="offer">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 20 C 8 14, 12 10, 16 10 C 20 10, 24 14, 24 20" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+            <circle cx="8" cy="22" r="2" fill="currentColor"/>
+            <circle cx="16" cy="8" r="2" fill="currentColor"/>
+            <circle cx="24" cy="22" r="2" fill="currentColor"/>
+          </svg>
+          <h4>Networks <em>& Access</em></h4>
+          <p>Doors that are hard to open alone—across finance, agribusiness, F&B, and the Muslim economy.</p>
+        </div>
+        <div class="offer">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="10" width="20" height="14" rx="1" stroke="currentColor" stroke-width="1.3" fill="none"/>
+            <path d="M10 14 L16 18 L22 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M14 6 L14 10 M18 6 L18 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          <h4>Operational <em>Discipline</em></h4>
+          <p>Tooling, dashboards, cadence. The quiet infrastructure that separates startups from busy work.</p>
+        </div>
+        <div class="offer">
+          <svg class="offer-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 6 L16 26" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M16 10 C 10 10, 8 6, 8 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M16 14 C 24 14, 26 10, 26 10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M16 20 C 10 20, 8 16, 8 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          </svg>
+          <h4>Hands-In <em>Soil</em></h4>
+          <p>We're not a dashboard investor. We help build—model, hire, negotiate, ship—when the founder needs a second pair of hands.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto">
+      <svg class="ornament" viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M2 12 L22 12" stroke="currentColor" stroke-width="0.8"/>
+        <path d="M38 12 L58 12" stroke="currentColor" stroke-width="0.8"/>
+        <circle cx="30" cy="12" r="3" stroke="currentColor" stroke-width="0.8" fill="none"/>
+        <circle cx="30" cy="12" r="1" fill="currentColor"/>
+      </svg>
+      <blockquote>
+        A forest is not built by who plants fastest. <em>It is built by who tends most patiently</em>—season after season, root after root.
+      </blockquote>
+      <div class="attrib">— The Bija Manifesto</div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div>
+        <div class="section-lbl">For Founders</div>
+        <h2>If you're building something <em>worth tending,</em> let's talk.</h2>
+        <p class="sub">
+          We're selective, not because we want to gatekeep, but because meaningful partnership demands alignment. If our philosophy resonates with yours, we'd like to meet.
+        </p>
+        <div class="cta-actions">
+          <a href="#" class="btn">
+            Share Your Idea
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 7 L13 7 M8 2 L13 7 L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#" class="btn ghost">Read the Full Manifesto</a>
+        </div>
+      </div>
+      <div class="cta-right">
+        <div class="lbl">What we ask in return</div>
+        <h4>Openness. Shared vision.<br>Shared risk. Shared return.</h4>
+        <p>We don't look for founders seeking money. We look for partners seeking fellow planters.</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="fm">Bija — the seed of Arunami, under the sky of Prana.</div>
+      <div>© 2026 · Early-Stage Venture Studio · Jakarta</div>
+    </footer>
+
+  </div>
+</body>
+</html>

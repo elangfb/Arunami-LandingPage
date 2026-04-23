@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ekosistem — Arunami</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:         #f4efe6;
+    --bg-deeper:  #ebe3d5;
+    --bg-soft:    #faf6ee;
+    --ink:        #1b2a22;
+    --ink-soft:   #2d3d33;
+    --muted:      #5a6a5f;
+    --moss:       #4a6b4d;
+    --moss-deep:  #2f4a34;
+    --clay:       #b3693f;
+    --clay-soft:  #c98a5f;
+    --line:       rgba(27,42,34,0.14);
+    --line-soft:  rgba(27,42,34,0.06);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Manrope',-apple-system,sans-serif;
+    font-weight:400;line-height:1.6;font-size:16px;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+
+  /* grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:100;
+    opacity:0.32;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.16 0 0 0 0 0.13 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 85% 10%, rgba(179,105,63,0.10), transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(74,107,77,0.10), transparent 60%);
+  }
+
+  .wrap{
+    position:relative;z-index:1;
+    max-width:1180px;margin:0 auto;
+    padding:56px clamp(24px, 5vw, 72px) 80px;
+  }
+
+  /* NAV crumb */
+  .crumb{
+    display:flex;align-items:center;gap:14px;
+    padding-bottom:48px;margin-bottom:56px;
+    border-bottom:1px solid var(--line);
+  }
+  .crumb-brand{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:18px;letter-spacing:0.04em;color:var(--ink);
+    text-decoration:none;
+  }
+  .crumb-sep{color:var(--muted);opacity:0.5}
+  .crumb-current{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;
+  }
+
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:80px;
+    align-items:center;margin-bottom:96px;
+  }
+  @media(max-width:900px){.hero{grid-template-columns:1fr;gap:40px}}
+
+  .hero .tag{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--moss);margin-bottom:24px;font-weight:600;
+    display:flex;align-items:center;gap:12px;
+  }
+  .hero .tag::before{
+    content:"";width:36px;height:1px;background:var(--clay);
+  }
+
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(48px, 6.5vw, 88px);line-height:0.98;
+    letter-spacing:-0.025em;color:var(--ink);margin-bottom:32px;
+  }
+  h1 em{font-style:italic;font-weight:300;color:var(--moss)}
+
+  .lede{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:21px;line-height:1.55;color:var(--ink-soft);
+    max-width:520px;
+  }
+  .lede em{font-style:italic;color:var(--moss-deep);font-weight:400}
+
+  /* Hero diagram */
+  .hero-diagram{
+    display:flex;flex-direction:column;align-items:center;gap:0;
+  }
+  .layer{
+    display:flex;align-items:center;gap:18px;padding:14px 0;
+    width:100%;max-width:280px;
+  }
+  .layer-icon{
+    width:48px;height:48px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;color:var(--moss-deep);
+  }
+  .layer-text{
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .layer-text .nm{
+    font-family:'Fraunces',serif;font-weight:400;font-size:22px;
+    letter-spacing:-0.005em;
+  }
+  .layer-text .nm em{font-style:italic;color:var(--clay)}
+  .layer-text .rl{
+    font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;
+  }
+  .layer-connector{
+    width:1px;height:20px;margin-left:23px;
+    background:linear-gradient(to bottom, var(--line), var(--clay), var(--line));
+    align-self:flex-start;
+  }
+
+  /* Manifesto */
+  .manifesto{
+    padding:72px 0;margin-bottom:88px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    text-align:center;
+  }
+  .manifesto-ornament{
+    display:flex;justify-content:center;align-items:center;gap:12px;
+    margin-bottom:28px;
+  }
+  .manifesto-ornament .l{width:32px;height:1px;background:var(--clay)}
+  .manifesto-ornament svg{width:14px;height:14px;color:var(--clay)}
+
+  .manifesto-text{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:clamp(22px, 2.8vw, 30px);line-height:1.4;
+    max-width:780px;margin:0 auto;color:var(--ink);
+    letter-spacing:-0.005em;
+  }
+  .manifesto-text em{
+    font-style:normal;color:var(--moss-deep);font-weight:400;
+  }
+  .manifesto-text strong{
+    font-style:normal;color:var(--clay);font-weight:400;
+  }
+
+  /* Section header */
+  .section-head{margin-bottom:56px;text-align:center}
+  .section-lbl{
+    font-size:11px;letter-spacing:0.3em;text-transform:uppercase;
+    color:var(--clay);font-weight:600;margin-bottom:16px;
+  }
+  h2{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(32px, 4vw, 48px);line-height:1.05;
+    letter-spacing:-0.015em;color:var(--ink);
+  }
+  h2 em{font-style:italic;color:var(--moss)}
+
+  /* THREE-CARD COMPARISON */
+  .cards{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+    margin-bottom:80px;
+  }
+  @media(max-width:900px){.cards{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    padding:40px 32px 36px;
+    display:flex;flex-direction:column;
+    position:relative;
+    transition:transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 40px -24px rgba(27,42,34,0.25);
+  }
+  .card.dark{
+    background:var(--moss-deep);
+    border-color:var(--moss-deep);
+    color:var(--bg-soft);
+  }
+  .card.dark::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .card > *{position:relative;z-index:1}
+
+  .card-symbol{
+    width:64px;height:64px;margin-bottom:24px;
+    color:var(--moss-deep);
+  }
+  .card.dark .card-symbol{color:var(--bg-soft)}
+
+  .card-role{
+    font-size:10px;letter-spacing:0.3em;text-transform:uppercase;
+    font-weight:700;color:var(--muted);margin-bottom:10px;
+  }
+  .card.dark .card-role{color:rgba(244,239,230,0.6)}
+
+  .card-name{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:42px;letter-spacing:-0.015em;line-height:1;
+    margin-bottom:8px;
+  }
+  .card-name em{font-style:italic;color:var(--clay)}
+  .card.dark .card-name em{color:var(--clay-soft)}
+
+  .card-tagline{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:16px;color:var(--moss-deep);margin-bottom:28px;
+    padding-bottom:24px;border-bottom:1px solid var(--line);
+  }
+  .card.dark .card-tagline{
+    color:var(--clay-soft);
+    border-bottom-color:rgba(244,239,230,0.18);
+  }
+
+  .card-desc{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:16px;line-height:1.6;color:var(--ink-soft);
+    margin-bottom:28px;
+  }
+  .card.dark .card-desc{color:rgba(244,239,230,0.82)}
+
+  /* criteria rows */
+  .spec-list{
+    display:flex;flex-direction:column;gap:16px;
+    margin-top:auto;
+  }
+  .spec{
+    display:grid;grid-template-columns:1fr;gap:3px;
+    padding-bottom:14px;
+    border-bottom:1px dashed var(--line-soft);
+  }
+  .spec:last-child{border-bottom:none;padding-bottom:0}
+  .card.dark .spec{border-bottom-color:rgba(244,239,230,0.12)}
+
+  .spec-label{
+    font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;
+  }
+  .card.dark .spec-label{color:rgba(244,239,230,0.55)}
+
+  .spec-value{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:15px;line-height:1.4;color:var(--ink);
+    letter-spacing:-0.002em;
+  }
+  .card.dark .spec-value{color:var(--bg-soft)}
+  .spec-value em{font-style:italic;color:var(--moss)}
+  .card.dark .spec-value em{color:var(--clay-soft)}
+
+  /* highlighted investment number */
+  .spec-value strong{
+    font-weight:500;color:var(--clay);font-style:normal;
+    display:block;font-size:17px;margin-bottom:2px;
+  }
+  .card.dark .spec-value strong{color:var(--clay-soft)}
+
+  /* JOURNEY STRIP */
+  .journey{
+    background:var(--bg-deeper);
+    padding:48px clamp(28px, 4vw, 56px);
+    border:1px solid var(--line);
+    margin-bottom:72px;
+  }
+  .journey-title{
+    font-family:'Fraunces',serif;font-weight:300;font-style:italic;
+    font-size:22px;color:var(--moss-deep);margin-bottom:28px;
+    text-align:center;
+  }
+  .journey-title em{font-style:normal;color:var(--clay)}
+
+  .journey-steps{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;
+    align-items:center;gap:20px;
+  }
+  @media(max-width:760px){
+    .journey-steps{grid-template-columns:1fr;gap:12px}
+    .journey-arrow{display:none}
+  }
+  .journey-step{
+    text-align:center;padding:16px 8px;
+  }
+  .journey-step .js-nm{
+    font-family:'Fraunces',serif;font-weight:400;font-size:20px;
+    color:var(--ink);letter-spacing:-0.005em;margin-bottom:4px;
+  }
+  .journey-step .js-nm em{font-style:italic;color:var(--clay)}
+  .journey-step .js-sub{
+    font-size:12px;color:var(--muted);letter-spacing:0.04em;
+  }
+  .journey-arrow{
+    color:var(--clay);opacity:0.6;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* CTA */
+  .cta{
+    text-align:center;padding:48px 0 24px;
+  }
+  .cta h3{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(26px, 3vw, 34px);line-height:1.2;
+    color:var(--ink);margin-bottom:16px;letter-spacing:-0.01em;
+  }
+  .cta h3 em{font-style:italic;color:var(--moss)}
+  .cta p{
+    font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 32px;
+  }
+  .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 28px;font-family:'Manrope',sans-serif;
+    font-size:12px;font-weight:600;letter-spacing:0.16em;
+    text-transform:uppercase;text-decoration:none;
+    border:1px solid var(--ink);background:var(--ink);color:var(--bg);
+    transition:all 0.3s ease;
+  }
+  .btn:hover{background:var(--moss-deep);border-color:var(--moss-deep);transform:translateY(-1px)}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn svg{width:12px;height:12px}
+
+  footer{
+    margin-top:60px;padding-top:36px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:baseline;
+    flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted);
+  }
+  footer .fm{
+    font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:14px;color:var(--ink-soft);
+  }
+
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .wrap > *{animation:rise 0.9s ease both}
+  .wrap > .crumb{animation-delay:0s}
+  .wrap > .hero{animation-delay:0.1s}
+  .wrap > .manifesto{animation-delay:0.25s}
+  .wrap > .section-head{animation-delay:0.35s}
+  .wrap > .cards{animation-delay:0.45s}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- CRUMB -->
+    <div class="crumb">
+      <a href="/" class="crumb-brand">Arunami</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">Ekosistem</span>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="tag">Our Ecosystem</div>
+        <h1>Three seasons,<br>one <em>living system.</em></h1>
+        <p class="lede">
+          Arunami does not stand alone. It grows within an ecosystem of three—each with its own season, its own role, its own criteria. <em>Together they form the forest.</em>
+        </p>
+      </div>
+
+      <div class="hero-diagram">
+        <div class="layer">
+          <div class="layer-icon">
+            <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="22" fill="#b3693f"/>
+              <circle cx="60" cy="60" r="34" stroke="#b3693f" stroke-width="0.8" fill="none" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="layer-text">
+            <div class="rl">The Sky</div>
+            <div class="nm">Prana</div>
+          </div>
+        </div>
+        <div class="layer-connector"></div>
+        <div class="layer">
+          <div class="layer-icon">
+            <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+              <path d="M60 100 L60 54" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M60 54 C 34 54, 24 34, 36 22 C 48 14, 58 22, 60 32 C 62 22, 72 14, 84 22 C 96 34, 86 54, 60 54 Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="layer-text">
+            <div class="rl">The Forest</div>
+            <div class="nm">Arunami</div>
+          </div>
+        </div>
+        <div class="layer-connector"></div>
+        <div class="layer">
+          <div class="layer-icon">
+            <svg width="44" height="44" viewBox="0 0 120 120" fill="none">
+              <path d="M60 18 C 42 28, 34 44, 34 60 C 34 82, 48 100, 60 104 C 72 100, 86 82, 86 60 C 86 44, 78 28, 60 18 Z" fill="currentColor"/>
+              <path d="M60 24 C 56 42, 56 78, 60 98" stroke="#f4efe6" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+              <circle cx="60" cy="60" r="6" fill="#b3693f"/>
+            </svg>
+          </div>
+          <div class="layer-text">
+            <div class="rl">The Seed</div>
+            <div class="nm">Bija</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto">
+      <div class="manifesto-ornament">
+        <div class="l"></div>
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="currentColor"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.5"/></svg>
+        <div class="l"></div>
+      </div>
+      <p class="manifesto-text">
+        We do not invest in companies. <em>We cultivate ecosystems.</em><br>
+        We do not chase unicorns. <em>We raise forests.</em><br>
+        We measure not by exits, but by <strong>what is still alive—</strong>three generations from now.
+      </p>
+    </section>
+
+    <!-- THREE CARDS -->
+    <section class="section-head">
+      <div class="section-lbl">Our Three Vehicles</div>
+      <h2>Each season, <em>its own discipline.</em></h2>
+    </section>
+
+    <section class="cards">
+
+      <!-- BIJA CARD -->
+      <div class="card">
+        <svg class="card-symbol" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="60" r="52" stroke="currentColor" stroke-width="0.5" fill="none" opacity="0.3"/>
+          <path d="M60 18 C 42 28, 34 44, 34 60 C 34 82, 48 100, 60 104 C 72 100, 86 82, 86 60 C 86 44, 78 28, 60 18 Z" fill="currentColor"/>
+          <path d="M60 24 C 56 42, 56 78, 60 98" stroke="#faf6ee" stroke-width="1.6" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="60" cy="60" r="6" fill="#b3693f"/>
+        </svg>
+        <div class="card-role">The Seed</div>
+        <div class="card-name">Bija<em>.</em></div>
+        <div class="card-tagline">where everything begins</div>
+        <p class="card-desc">
+          Seed-stage ventures with strong founders and exciting ideas. We back the blueprint—before the forest is visible.
+        </p>
+
+        <div class="spec-list">
+          <div class="spec">
+            <div class="spec-label">Stage</div>
+            <div class="spec-value">Early stage · under 3 years</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Investment</div>
+            <div class="spec-value"><strong>Up to IDR 1B</strong>Convertible note or equity</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Business Profile</div>
+            <div class="spec-value">Pre-revenue to early traction</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Strategic Support</div>
+            <div class="spec-value"><em>Finance, strategy, and networking</em></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARUNAMI CARD (active/dark) -->
+      <div class="card dark">
+        <svg class="card-symbol" viewBox="0 0 120 120" fill="none">
+          <path d="M20 100 L100 100" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+          <path d="M60 100 L60 54" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M60 54 C 34 54, 24 34, 36 22 C 48 14, 58 22, 60 32 C 62 22, 72 14, 84 22 C 96 34, 86 54, 60 54 Z" fill="currentColor"/>
+          <path d="M60 40 C 48 40, 42 30, 48 22 C 54 18, 60 22, 60 28 C 60 22, 66 18, 72 22 C 78 30, 72 40, 60 40 Z" fill="#c98a5f" opacity="0.55"/>
+        </svg>
+        <div class="card-role">The Forest</div>
+        <div class="card-name">Arunami<em>.</em></div>
+        <div class="card-tagline">where ecosystems compound</div>
+        <p class="card-desc">
+          Mature ventures past the fragile seasons. We partner on project-based, non-equity structures to deepen what is already alive.
+        </p>
+
+        <div class="spec-list">
+          <div class="spec">
+            <div class="spec-label">Stage</div>
+            <div class="spec-value">Mid-growth · 3+ year horizon</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Investment</div>
+            <div class="spec-value"><strong>Project-based</strong>Non-equity · profit sharing</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Business Profile</div>
+            <div class="spec-value">Annual revenue above IDR 10B</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Strategic Support</div>
+            <div class="spec-value"><em>Ecosystem access and activation</em></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRANA CARD -->
+      <div class="card">
+        <svg class="card-symbol" viewBox="0 0 120 120" fill="none">
+          <circle cx="60" cy="50" r="22" fill="#b3693f"/>
+          <circle cx="60" cy="50" r="32" stroke="#b3693f" stroke-width="0.6" fill="none" opacity="0.45"/>
+          <path d="M16 86 L104 86" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+          <path d="M22 96 L98 96" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+          <path d="M30 104 L90 104" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+        </svg>
+        <div class="card-role">The Sky</div>
+        <div class="card-name">Prana<em>.</em></div>
+        <div class="card-tagline">where horizons widen</div>
+        <p class="card-desc">
+          Growth-stage ventures ready for scaled capital and long-horizon ownership. We take majority positions to hold the wider sky.
+        </p>
+
+        <div class="spec-list">
+          <div class="spec">
+            <div class="spec-label">Stage</div>
+            <div class="spec-value">Growth stage · scalable models</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Investment</div>
+            <div class="spec-value"><strong>Majority equity</strong>Long-horizon ownership</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Business Profile</div>
+            <div class="spec-value">Annual revenue IDR 50–150B</div>
+          </div>
+          <div class="spec">
+            <div class="spec-label">Strategic Support</div>
+            <div class="spec-value"><em>Capital stewardship, strategic oversight</em></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- JOURNEY STRIP -->
+    <section class="journey">
+      <div class="journey-title">A founder can travel <em>the whole ecosystem</em> with us.</div>
+      <div class="journey-steps">
+        <div class="journey-step">
+          <div class="js-nm">Bija<em>.</em></div>
+          <div class="js-sub">we plant it</div>
+        </div>
+        <div class="journey-arrow">
+          <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M1 7 L26 7 M20 2 L26 7 L20 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="journey-step">
+          <div class="js-nm">Arunami<em>.</em></div>
+          <div class="js-sub">we deepen it</div>
+        </div>
+        <div class="journey-arrow">
+          <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M1 7 L26 7 M20 2 L26 7 L20 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="journey-step">
+          <div class="js-nm">Prana<em>.</em></div>
+          <div class="js-sub">we scale it</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <h3>Which season <em>are you in?</em></h3>
+      <p>If your venture fits one of our three vehicles—and if our philosophy resonates with yours—we'd like to meet.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn">
+          Share Your Venture
+          <svg viewBox="0 0 14 14" fill="none"><path d="M1 7 L13 7 M8 2 L13 7 L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="btn ghost">Read the Full Manifesto</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="fm">Bija · Arunami · Prana — one living system.</div>
+      <div>© 2026 · Arunami.id</div>
+    </footer>
+
+  </div>
+</body>
+</html>
